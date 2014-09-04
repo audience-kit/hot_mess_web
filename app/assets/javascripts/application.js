@@ -12,8 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
 //= require_tree .
-
-var facebook_app_id = 713525542035088;

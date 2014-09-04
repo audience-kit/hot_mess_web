@@ -8,10 +8,30 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body
-    .navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+  %body( role="document" )
+    = javascript_include_tag '/facebook_config.js'
+    .navbar.navbar-default.navbar-fixed-top( role="navigation" )
       .container
         .navbar-header
           %a.navbar-brand{ :href => root_path } Hot Mess Seattle
-    .container(role="main")
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li{ :class => ('active' if params[:controller] == 'home' && params[:action] == 'index') }
+              %a{ :href => root_path } Home
+            %li{ :class => ('active' if params[:controller] == 'events') }
+              %a{ :href => events_path } Events
+            %li{ :class => ('active' if params[:controller] == 'venues') }
+              %a{ :href => venues_path } Venues
+          %ul.nav.navbar-nav.navbar-right
+            - if session[:user_id].nil?
+              %li
+                %a.facebook_login( href = "#" )
+                  Login
+            - else
+              %li
+                %a.user_name()= session[:name]
+              %li
+                %a.facebook_logout( href = "#" )
+                  Logout
+    .container( role="main" )
       = yield

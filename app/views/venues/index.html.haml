@@ -1,0 +1,21 @@
+.row
+  %h1.page-header Listing Seattle Venues
+
+- @venues.each do |venue|
+  .row
+    .col-md-12
+      .pull-left( style="margin-right: 16px" )
+        %img{ src: venue.picture.url }
+
+      .pull-left
+        %p= link_to venue.name, venue
+        %p= venue.about
+
+      - if is_admin?
+        .pull-right
+          = link_to 'Edit', venue, class: 'btn btn-warning'
+
+
+
+- if is_admin?
+  = link_to 'New Venue', new_venue_path, class: 'btn btn-primary'

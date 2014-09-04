@@ -1,19 +1,15 @@
 class HomeController < ApplicationController
-  before_action :set_home, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: :facebook_config
 
   # GET /homes
   # GET /homes.json
   def index
+    respond_to do |format|
+      format.html
+    end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_home
-      @home = Home.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def home_params
-      params[:home]
-    end
+  def facebook_config
+    @facebook_app_id = Rails.application.secrets['facebook']['app_id']
+  end
 end
