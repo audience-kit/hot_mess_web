@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       logger.debug "\tReceived Facebook signed authentication message #{auth_response.inspect}"
 
       user_id = facebook_session_params[:authResponse][:userID].to_i
-      user = User.includes(:person).find_or_initialize_by(facebook_id: user_id)
+      user = User.includes(:people).find_or_initialize_by(facebook_id: user_id)
 
       access_token_info = facebook_oauth.get_access_token_info(auth_response['code'])
       logger.debug "\tGot access token info from Facebook #{access_token_info.inspect}"

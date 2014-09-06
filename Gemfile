@@ -35,7 +35,9 @@ gem 'haml-rails'
 gem 'mongoid'
 
 # Use the puma application server for production
-gem 'puma', group: [ :production ]
+gem 'puma'
+
+gem 'resque'
 
 # Use RSpec for testing
 group :development, :test do

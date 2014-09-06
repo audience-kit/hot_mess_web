@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
   resources :events
 
+  resources :people do
+    post :import, on: :collection
+
+    resources :events, only: [:index, :new, :create] do
+      post :import, on: :collection
+    end
+  end
+
   resources :venues do
-    post 'import', on: :collection
-    post 'update_events', on: :member
+    post :import, on: :collection
+
+    resources :events, only: [:index, :new, :create] do
+      post :import, on: :collection
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
