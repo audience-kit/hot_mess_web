@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
 
   def facebook_graph
     @@facebook_app_access_token ||= facebook_oauth.get_app_access_token
+    logger.debug "\tFacebook App Access Token => #{@@facebook_app_access_token}"
     @facebook_graph = Koala::Facebook::API.new(@@facebook_app_access_token)
   end
 

@@ -34,4 +34,13 @@
                 %a.facebook_logout( href = "#" )
                   Logout
     .container( role="main" )
+      - if flash[:notice]
+        %p#notice.bg-primary.flash= flash[:notice]
+      - if flash[:danger]
+        %p#flash_danger.bg-danger.flash= flash[:danger]
+      - if flash[:success]
+        %p#flash_success.bg-success.flash= flash[:success]
+      - if flash[:warning]
+        %p#flash_warning.bg-warning.flash= flash[:warning]
+
       = yield

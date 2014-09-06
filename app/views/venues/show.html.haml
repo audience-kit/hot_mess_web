@@ -1,4 +1,4 @@
-%p#notice= notice
+
 
 .row
   .page-header
@@ -47,10 +47,13 @@
                 = hidden_field_tag :import_venue_page, @venue.facebook_id
                 = form.submit 'Refresh', class: 'btn btn-success'
 
-- if is_admin? && Rails.env == 'development'
-  = @venue.inspect
+
 
 - if is_admin?
   = link_to 'Edit', edit_venue_path(@venue)
   \|
   = link_to 'Back', venues_path
+
+- if is_admin? && Rails.env == 'development'
+  %p.text-muted
+    = @venue.inspect

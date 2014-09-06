@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :venues do
     post 'import', on: :collection
+    post 'update_events', on: :member
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

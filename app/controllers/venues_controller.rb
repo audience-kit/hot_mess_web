@@ -28,7 +28,7 @@ class VenuesController < ApplicationController
 
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
+        format.html { redirect_to @venue, flash: { success: 'Venue was successfully created.' } }
         format.json { render :show, status: :created, location: @venue }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class VenuesController < ApplicationController
   def update
     respond_to do |format|
       if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
+        format.html { redirect_to @venue, flash: { success: 'Venue was successfully updated.' } }
         format.json { render :show, status: :ok, location: @venue }
       else
         format.html { render :edit }
@@ -56,34 +56,61 @@ class VenuesController < ApplicationController
     page_name = params[:import_venue_page]
     logger.debug "\tRequested to import Facebook page #{page_name}"
 
-    graph = user.facebook_graph
+    graph = facebook_graph
+    app_import = true
 
-    page = graph.get_page(page_name).with_indifferent_access
+    begin
+      page = graph.get_page(page_name).with_indifferent_access
+    rescue
+      graph = user.facebook_graph
+      app_import = false
+    end
+
+    begin
+      page = graph.get_page(page_name).with_indifferent_access
+    rescue
+      render flash: { danger: "Could not find page with name #{page_name}" }
+    end
+
     logger.debug "\tGot Facebook page => #{page.inspect}"
 
-    venue = Venue.find_or_initialize_by(facebook_id: page[:id])
+    @venue = Venue.find_or_initialize_by(facebook_id: page[:id])
 
     page.delete(:id)
 
     page.each do |key,value|
-      venue[key.to_s] = value
+      @venue[key.to_s] = value
     end
 
-    venue.imported_at = DateTime.now.utc
-    venue.imported_by = user
+    @venue.imported_at = DateTime.now.utc
+    if app_import
+      @venue.imported_by = nil
+    else
+      @venue.imported_by = user
+    end
 
-    photo = graph.get_connections(venue.facebook_id, "picture?redirect=false")['data']
+    photo = graph.get_connections(@venue.facebook_id, "picture?redirect=false")['data']
     logger.debug "\tGot Facebook photo for page => #{photo.inspect}"
-    venue.build_picture unless venue.picture
+    @venue.build_picture unless @venue.picture
 
     photo.each do |key,value|
-      venue.picture[key.to_s] = value
+      @venue.picture[key.to_s] = value
     end
-    venue.picture.save
+    @venue.picture.save
 
-    venue.save!
+    respond_to do |format|
+      if @venue.save
+        format.html { redirect_to @venue, flash: { success: 'Venue was successfully created.' } }
+        format.json { render :show, status: :created, location: @venue }
+      else
+        format.html { render :new }
+        format.json { render json: @venue.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-    redirect_to venue
+  def update_events
+
   end
 
   # DELETE /venues/1
