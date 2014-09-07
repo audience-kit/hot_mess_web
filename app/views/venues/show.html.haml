@@ -7,12 +7,14 @@
 
 .row
   .col-md-8
-    .row
-      %p
-        = @venue.description
-    - if @venue.cover
-      .row
-        %img{ src: @venue.cover.source }
+    - if @venue.description || @venue.cover
+      .panel.panel-primary
+        .panel-body
+          - if @venue.description
+            %p
+              = @venue.description
+          - if @venue.cover
+            %img{ src: @venue.cover.source, style: 'width: 100%' }
 
   .col-md-4
     .panel.panel-default
@@ -30,7 +32,10 @@
           %b Facebook Page
         %p
           = link_to @venue.facebook_url, @venue.facebook_url
-        - if is_admin? && @venue.imported_by
+    - if is_admin?
+      .panel.panel-default
+        .panel-heading Administration
+        .panel-body
           %p
             %b Imported At
           %p

@@ -25,7 +25,9 @@ class ApplicationController < ActionController::Base
 
   private
   def set_user
-    unless session[:user_id].nil?
+    if session[:user_id].nil?
+      redirect_to root_path
+    else
       logger.debug "\tSession User ID => #{session[:user_id].inspect}"
       @user ||= User.find(BSON::ObjectId.from_string(session[:user_id]))
     end

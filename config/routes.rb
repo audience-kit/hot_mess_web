@@ -74,6 +74,8 @@ Rails.application.routes.draw do
 
   resource :session
 
+  get 'dashboard' => 'home#dashboard'
+
   get 'facebook_config.js' => 'home#facebook_config', format: 'js'
 
   root 'home#index'
