@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require ie10-viewport-bug-workaround
 //= require_tree .

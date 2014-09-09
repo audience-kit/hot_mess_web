@@ -3,6 +3,11 @@ class PeopleController < ApplicationController
   end
 
   def show
+    if params[:id]
+      @person = Person.find(params[:id])
+    else
+      @person = Person.find(session[:person_id])
+    end
   end
 
   def new

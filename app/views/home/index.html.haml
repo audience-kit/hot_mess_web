@@ -35,7 +35,9 @@
             %p.lead
               Hot Mess is your link to the local gay nightlife.  Whether in your home town or while you're traveling, the details are here.
             %p.lead
-              %a.btn.btn-lg.btn-default.facebook_login{:href => "#", :style => 'background: #3b5998; border-color: #8b9dc3; color: white;'} Login with Facebook
+              %a.btn.btn-lg.btn-default.facebook_login{:href => "#", :style => 'background: #3b5998; border-color: #8b9dc3; color: white;'}
+                = image_tag 'facebook_logo_white.png', size: '24x24', style: 'margin-right: 8px;'
+                Login with Facebook
           .mastfoot
             .inner
               %p
@@ -45,12 +47,3 @@
                 by
                 = succeed "." do
                   %a{:href => "https://twitter.com/mdo"} @mdo
-    /
-      Bootstrap core JavaScript
-      \==================================================
-    / Placed at the end of the document so the pages load faster
-
-
-    /%script{:src => "../../assets/js/docs.min.js"}
-    / IE10 viewport hack for Surface/desktop Windows 8 bug
-    /%script{:src => "../../assets/js/ie10-viewport-bug-workaround.js"}
