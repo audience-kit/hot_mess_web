@@ -1,0 +1,29 @@
+%h1 Create a New Venue
+
+.row
+  = form_for :venue_import, url: import_venues_path do |form|
+    .col-md-6
+      .panel.panel-default
+        .panel-heading Import a Venue
+        .panel-body
+          %fieldset
+            .input-group
+              %span.input-group-addon facebook.com/
+              %input.form-control#import_venue_page( type="text" placeholder="page" name="import_venue_page" )
+        .panel-footer.clearfix
+          .pull-left
+            = link_to 'Cancel', venues_path, class: 'btn btn-danger'
+          .pull-right
+            = form.submit 'Import', class: 'btn btn-success'
+
+  = form_for @venue do |form|
+    .col-md-6
+      .panel.panel-default
+        .panel-heading Create a Venue Manually
+        .panel-body
+          = render partial: 'form', locals: { f: form }
+        .panel-footer.clearfix
+          .pull-left
+            = link_to 'Cancel', venues_path, class: 'btn btn-danger'
+          .pull-right
+            = form.submit 'Create', class: 'btn btn-primary'

@@ -1,0 +1,16 @@
+%h1.page-header Listing Locales
+
+%table.table
+  %thead
+    %tr
+      %th Name
+  %tbody
+    - if @locales.any?
+      - @locales.each do |locale|
+        %tr
+          %td= locale.name
+    - else
+      %tr
+        %td There are no records
+
+%a.btn.btn-primary{ href: new_admin_locale_path } Create Locale

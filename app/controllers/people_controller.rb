@@ -1,19 +1,23 @@
 class PeopleController < ApplicationController
   def index
+    @people = Person.all
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def show
-  end
+    if params[:id]
+      @person = Person.find(params[:id])
+    else
+      @person = Person.find(session[:person_id])
+    end
 
-  def new
-  end
-
-  def edit
-  end
-
-  def destroy
-  end
-
-  def create
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 end

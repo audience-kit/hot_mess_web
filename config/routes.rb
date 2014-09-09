@@ -72,7 +72,18 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  namespace :admin do
+    resources :locales
+    resources :people
+    resources :venues
+    resources :events
+  end
+
   resource :session
+
+  get 'dashboard' => 'home#dashboard'
+
+  get 'me' => 'people#show'
 
   get 'facebook_config.js' => 'home#facebook_config', format: 'js'
 
