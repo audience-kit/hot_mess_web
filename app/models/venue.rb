@@ -19,6 +19,8 @@ class Venue
   embeds_one :location
   embeds_one :cover
 
+  validates_presence_of :name
+
   def facebook_url
     if self['username']
       "http://facebook.com/#{self['username']}"

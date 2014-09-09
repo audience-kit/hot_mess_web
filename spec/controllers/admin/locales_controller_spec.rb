@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::LocalesController, :type => :controller do
   include_context 'session'
+  it_behaves_like :admin_page
 
   describe "GET index" do
     it "assigns a list of locales" do
@@ -12,11 +13,6 @@ RSpec.describe Admin::LocalesController, :type => :controller do
     it "renders the index view" do
       get :index, {}, valid_admin_session
       expect(response).to render_template 'index'
-    end
-
-    it "redirects non-admin users" do
-      get :index, {}, valid_user_session
-      expect(response).to_not render_template 'index'
     end
   end
 

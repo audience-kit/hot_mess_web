@@ -1,11 +1,11 @@
-class Admin::EventsController < ApplicationController
+class Admin::EventsController < Admin::AdminController
+  before_filter :set_event, only: [ :show, :edit, :destroy, :update ]
 
   def index
     @events = Event.all
   end
 
   def show
-    @event = Event.find(params[:id])
   end
 
   # GET /events/new
@@ -15,7 +15,6 @@ class Admin::EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
   end
 
   # POST /events
@@ -62,6 +61,10 @@ class Admin::EventsController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:start, :end, :name)
+    params.require(:event).permit(:start_at, :end_at, :name)
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 end

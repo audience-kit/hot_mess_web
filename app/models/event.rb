@@ -8,4 +8,8 @@ class Event
   field :start_at, type: DateTime
   field :end_at, type: DateTime
   field :minimum_age, type: Integer
+
+  validates_presence_of :name
+  validates_presence_of :start_at
+  validates_presence_of :end_at
 end

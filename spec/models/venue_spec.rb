@@ -13,9 +13,9 @@ RSpec.describe Venue, :type => :model do
     expect(venue.valid?).to be_truthy
   end
 
-  it "should be invalid when the phone number is invalid" do
-    venue = build(:venue_invalid_phone)
-
+  it "should be invalid when the name is invalid" do
+    venue = build(:venue)
+    venue.name = nil
     expect(venue.valid?).to be_falsey
   end
 end

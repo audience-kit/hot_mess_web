@@ -3,11 +3,7 @@
 FactoryGirl.define do
   factory :venue do
     name "Everafter"
-    phone_number "+15098921403"
-    address
-
-    factory :venue_invalid_phone do
-      phone_number "lk4829839"
-    end
+    phone "+15098921403"
+    location Address.new( address_line: '556 Harvard Ave E', city: 'Seattle', state: 'WA', zip: '98102' )
   end
 end

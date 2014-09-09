@@ -1,12 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "venues/new", :type => :view do
+RSpec.describe "admin/venues/new", :type => :view do
   before(:each) do
-    assign(:venue, Venue.new(
-      :name => "MyString",
-      :address => "MyString",
-      :phone_number => "MyString"
-    ))
+    assign(:venue, create(:venue))
   end
 
   it "renders new venue form" do

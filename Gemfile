@@ -50,6 +50,7 @@ gem 'foreman'
 
 gem 'koala'
 
+gem 'database_cleaner'
 # Use unicorn as the app server
 # gem 'unicorn'
 
