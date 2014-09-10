@@ -29,7 +29,7 @@ class Admin::VenuesController < Admin::AdminController
 
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, flash: { success: 'Venue was successfully created.' } }
+        format.html { redirect_to [:admin, @venue], flash: { success: 'Venue was successfully created.' } }
         format.json { render :show, status: :created, location: @venue }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Admin::VenuesController < Admin::AdminController
   def update
     respond_to do |format|
       if @venue.update(venue_params)
-        format.html { redirect_to @venue, flash: { success: 'Venue was successfully updated.' } }
+        format.html { redirect_to [:admin, @venue], flash: { success: 'Venue was successfully updated.' } }
         format.json { render :show, status: :ok, location: @venue }
       else
         format.html { render :edit }
@@ -101,7 +101,7 @@ class Admin::VenuesController < Admin::AdminController
 
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, flash: { success: 'Venue was successfully created.' } }
+        format.html { redirect_to [:admin, @venue], flash: { success: 'Venue was successfully created.' } }
         format.json { render :show, status: :created, location: @venue }
       else
         format.html { render :new }

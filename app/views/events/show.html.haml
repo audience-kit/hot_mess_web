@@ -1,15 +1,13 @@
-%p#notice= notice
+%h1.page-header= @event.name
 
-%p
-  %b Start:
-  = @event.start
-%p
-  %b End:
-  = @event.end
-%p
-  %b Name:
-  = @event.name
-
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
+.row
+  .col-md-8
+    .panel.panel-primary
+      .panel-heading Event Details
+      .panel-body
+        = @event.description
+  .col-md-4
+    .panel.panel-default
+      .panel-heading Venue
+      .panel-body
+        = @event.venue.name

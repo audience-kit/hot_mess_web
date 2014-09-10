@@ -1,5 +1,25 @@
-%h1 New event
+%h1.page-header New Event
 
-= render 'form'
+- if params[:facebook_id].nil?
+  .row
+    .panel.panel-default
+      .panel-heading Import an Event
+      %table.table
+        %thead
+          %tr
+            %th Name
+            %th Location
+            %th Date
+        %tbody
+          - @importable_events.each do |event|
+            %tr
+              %td= link_to (truncate event['name'], length: 60), new_admin_event_path(facebook_id: event['id'])
+              %td= event['location']
+              %td= event['start_time']
 
-= link_to 'Back', events_path
+.row
+  .panel.panel-default
+    .panel-heading Create an Event
+    .panel-body
+      = render 'form'
+

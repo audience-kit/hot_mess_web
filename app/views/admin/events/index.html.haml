@@ -1,0 +1,17 @@
+%h1.page-header Listing Events
+
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= link_to event.name, [:admin, event]
+        %td
+          = link_to 'Edit', edit_admin_event_path(event), class: 'btn btn-warning'
+          = link_to 'Delete', [:admin, event], method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
+
+= link_to 'New Event', new_admin_event_path, { class: 'btn btn-primary' }

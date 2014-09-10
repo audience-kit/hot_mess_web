@@ -1,0 +1,12 @@
+%h1.page-header= @event.name
+
+.row
+  = @event.description
+
+= link_to 'Edit', edit_admin_event_path(@event), class: 'btn btn-primary'
+= link_to 'Back', admin_events_path, class: 'btn btn-default'
+= link_to 'Delete', [:admin, @event], method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
+
+
+- if Rails.env == 'development'
+  .text-muted= @event.inspect

@@ -39,6 +39,10 @@ gem 'puma'
 
 gem 'resque'
 
+gem 'timezone'
+
+gem 'chronic'
+
 # Use RSpec for testing
 group :development, :test do
   gem 'rspec-rails'

@@ -43,21 +43,21 @@
           %p
             %b Imported By
           %p
-            = @venue.imported_by.name
+            - if @venue.imported_by
+              = @venue.imported_by.name
+            - else
+              System
           .clearfix
             .pull-left
-              = link_to 'Delete', @venue, method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
+              = link_to 'Delete', [:admin, @venue], method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
+              = link_to 'Edit', edit_admin_venue_path(@venue), class: 'btn btn-primary'
+              = link_to 'Back', admin_venues_path, class: 'btn btn-default'
             .pull-right
-              = form_for :import_venue, url: import_venues_path do |form|
+              = form_for :import_venue, url: import_admin_venues_path do |form|
                 = hidden_field_tag :import_venue_page, @venue.facebook_id
                 = form.submit 'Refresh', class: 'btn btn-success'
 
 
-
-- if is_admin?
-  = link_to 'Edit', edit_venue_path(@venue)
-  \|
-  = link_to 'Back', venues_path
 
 - if is_admin? && Rails.env == 'development'
   %p.text-muted

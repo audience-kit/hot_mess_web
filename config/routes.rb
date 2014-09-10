@@ -1,21 +1,10 @@
 Rails.application.routes.draw do
+
   resources :events
 
-  resources :people do
-    post :import, on: :collection
+  resources :people
 
-    resources :events, only: [:index, :new, :create] do
-      post :import, on: :collection
-    end
-  end
-
-  resources :venues do
-    post :import, on: :collection
-
-    resources :events, only: [:index, :new, :create] do
-      post :import, on: :collection
-    end
-  end
+  resources :venues
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -74,9 +63,19 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :locales
-    resources :people
-    resources :venues
-    resources :events
+
+    resources :people do
+      post :import, on: :collection
+    end
+
+    resources :venues do
+      post :import, on: :collection
+    end
+
+    resources :events do
+      post :import, on: :collection
+
+    end
   end
 
   resource :session

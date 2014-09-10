@@ -1,4 +1,4 @@
-= form_for @event do |f|
+= form_for [:admin, @event] do |f|
   - if @event.errors.any?
     #error_explanation
       %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
@@ -6,14 +6,31 @@
         - @event.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :start_at
-    = f.datetime_select :start_at
-  .field
-    = f.label :end_at
-    = f.datetime_select :end_at
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
+    = f.text_field :name, { class: 'form-control' }
+  .form-group
+    = f.label :start_time
+    = f.datetime_select :start_time
+  .form-group
+    = f.label :end_time
+    = f.datetime_select :end_time
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control', rows: 10
+  - if @event['owner']
+    .form-group
+      %label Owner
+      %div
+        %p.form-control-static= @event['owner']['name']
+        = f.hidden_field :person_id
+  - if @event.venue
+    .form-group
+      %label Venue
+      %div
+        %p.form-control-static= @event.venue.name
+        = f.hidden_field :venue_id
+
   .actions
-    = f.submit 'Save'
+    = link_to 'Cancel', events_path, class: 'btn btn-default'
+    = f.submit 'Save', class: 'btn btn-success'

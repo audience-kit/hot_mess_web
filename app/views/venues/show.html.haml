@@ -32,33 +32,3 @@
           %b Facebook Page
         %p
           = link_to @venue.facebook_url, @venue.facebook_url
-    - if is_admin?
-      .panel.panel-default
-        .panel-heading Administration
-        .panel-body
-          %p
-            %b Imported At
-          %p
-            = @venue.imported_at
-          %p
-            %b Imported By
-          %p
-            = @venue.imported_by.name
-          .clearfix
-            .pull-left
-              = link_to 'Delete', @venue, method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
-            .pull-right
-              = form_for :import_venue, url: import_venues_path do |form|
-                = hidden_field_tag :import_venue_page, @venue.facebook_id
-                = form.submit 'Refresh', class: 'btn btn-success'
-
-
-
-- if is_admin?
-  = link_to 'Edit', edit_venue_path(@venue)
-  \|
-  = link_to 'Back', venues_path
-
-- if is_admin? && Rails.env == 'development'
-  %p.text-muted
-    = @venue.inspect

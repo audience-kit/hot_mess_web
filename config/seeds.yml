@@ -1,0 +1,20 @@
+locales:
+  seattle:
+    name: "Seattle"
+    venues:
+      - 116321545059189   # Seattle Eagle Tavern
+      - 183716211669747   # Purr Cocktail Lounge
+      - 58260309278       # Rplace Seattle
+      - 505306519485467   # Neighbours Seattle
+      - 111565388880689   # C.C. Attles
+      - 136250379782585   # Diesel Seattle
+      - 276407207694      # Madison Pub
+      - 196120291315      # Pony Seattle
+      - 113908521985880   # The Cuff Seattle
+      - 384838405916      # Changes in Wallingford
+      - 115066521446      # Julia's on Broadway
+      - 25663234187       # The Baltic Room
+    people:
+      - 520232754690776   # Louie Alexander
+      - 165928710106475   # Robbie Turner
+      - 98480863062       # Nark Magazine

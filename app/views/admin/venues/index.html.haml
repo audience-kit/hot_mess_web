@@ -8,14 +8,17 @@
         %img{ src: venue.picture.url }
 
       .pull-left
-        %p= link_to venue.name, venue
-        %p= venue.about
+        %p= link_to venue.name, [venue]
+        - if venue.about
+          %p= truncate venue.about, length: 140
+        - else
+          %p.text-muted No Description
 
       - if is_admin?
         .pull-right
-          = link_to 'Edit', venue, class: 'btn btn-warning'
+          = link_to 'Edit', [:admin, venue], class: 'btn btn-warning'
 
 
 
 - if is_admin?
-  = link_to 'New Venue', new_venue_path, class: 'btn btn-primary'
+  = link_to 'New Venue', new_admin_venue_path, class: 'btn btn-primary'

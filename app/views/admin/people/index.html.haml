@@ -1,0 +1,12 @@
+%h1.page-header Listing People
+
+%table.table
+  %thead
+    %tr
+      %th Name
+  %tbody
+    - @people.each do |person|
+      %tr
+        %td= link_to person.name, [:admin, person]
+
+
