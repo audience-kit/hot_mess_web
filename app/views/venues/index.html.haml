@@ -2,10 +2,13 @@
   %h1.page-header Seattle Venues
 
 - @venues.each do |venue|
-  .row
+  .row.venue
     .col-md-12
       .pull-left( style="margin-right: 16px" )
-        %img{ src: venue.picture.url }
+        - if venue.picture
+          %img{ src: venue.picture.url }
+        - else
+          %div( style="width: 32px; height: 32px; background-color: #888;")
 
       .pull-left
         %p= link_to venue.name, venue

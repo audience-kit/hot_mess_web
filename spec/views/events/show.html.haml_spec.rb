@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "events/show", :type => :view do
   before(:each) do
-    @event = assign(:event, Event.create!(
-      :name => "Name"
-    ))
+    @event = assign(:event, create(:event))
   end
 
-  it "renders attributes in <p>" do
+  it "renders name in heading" do
     render
-    expect(rendered).to match(/Name/)
+
+    assert_select 'h1.page-header', @event.name
   end
 end

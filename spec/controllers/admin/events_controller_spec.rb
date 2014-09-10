@@ -13,7 +13,10 @@ RSpec.describe Admin::EventsController, :type => :controller do
   }
   describe "GET new" do
     it "assigns a new event as @event" do
+      Mock::Facebook.mock_facebook_api(self)
+
       get :new, {}, valid_admin_session
+
       expect(assigns(:event)).to be_a_new(Event)
     end
   end
@@ -45,7 +48,7 @@ RSpec.describe Admin::EventsController, :type => :controller do
       it "redirects to the created event" do
         post :create, {:event => valid_attributes}, valid_admin_session
 
-        expect(response).to redirect_to(Event.last)
+        expect(response).to redirect_to([:admin, Event.last])
       end
     end
 
@@ -114,7 +117,7 @@ RSpec.describe Admin::EventsController, :type => :controller do
     it "redirects to the events list" do
       event = create(:event)
       delete :destroy, {:id => event.to_param}, valid_admin_session
-      expect(response).to redirect_to(events_url)
+      expect(response).to redirect_to(admin_events_url)
     end
   end
 end

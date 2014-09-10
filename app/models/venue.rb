@@ -20,6 +20,7 @@ class Venue
   embeds_one :cover
 
   validates_presence_of :name
+  validates_associated :picture
 
   def facebook_url
     if self['username']

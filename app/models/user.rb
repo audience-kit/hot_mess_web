@@ -10,6 +10,8 @@ class User
   has_one :person
 
   validates_presence_of :facebook_id
+  validates_presence_of :person
+  validates_associated :person
 
 
   def update_from_facebook

@@ -60,7 +60,7 @@ RSpec.describe Admin::VenuesController, :type => :controller do
 
       it "redirects to the created venue" do
         post :create, {:venue => valid_attributes}, valid_admin_session
-        expect(response).to redirect_to(Venue.last)
+        expect(response).to redirect_to([:admin, Venue.last])
       end
     end
 
@@ -99,7 +99,7 @@ RSpec.describe Admin::VenuesController, :type => :controller do
       it "redirects to the venue" do
         venue = Venue.create! valid_attributes
         put :update, {:id => venue.to_param, :venue => valid_attributes}, valid_admin_session
-        expect(response).to redirect_to(venue)
+        expect(response).to redirect_to([:admin, venue])
       end
     end
 

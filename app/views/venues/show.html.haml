@@ -28,7 +28,8 @@
           %b Phone number
         %p
           = @venue.phone
-        %p
-          %b Facebook Page
-        %p
-          = link_to @venue.facebook_url, @venue.facebook_url
+        - if @venue.facebook_url
+          %p
+            %b Facebook Page
+          %p
+            = link_to @venue.facebook_url, @venue.facebook_url

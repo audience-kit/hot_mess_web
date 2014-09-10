@@ -25,6 +25,22 @@ class ApplicationController < ActionController::Base
 
   private
   def set_user
+    if Rails.env == 'test' && env['HTTP_X_TEST_USER']
+      logger.debug "\tSetting up test user #{env['HTTP_X_TEST_USER']}"
+      user = User.find(env['HTTP_X_TEST_USER'])
+
+      session[:user_id]     = user.id.to_s
+      session[:is_admin]    = user.is_admin
+      session[:first_name]  = user.person.first_name
+      session[:last_name]   = user.person.last_name
+      session[:name]        = user.person.name
+      session[:person_id]   = user.person.id.to_s
+
+      @user = user
+      return
+    end
+
+
     if session[:user_id].nil?
       redirect_to root_path
     else

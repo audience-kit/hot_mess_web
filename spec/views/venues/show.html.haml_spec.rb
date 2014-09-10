@@ -2,17 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "venues/show", :type => :view do
   before(:each) do
-    @venue = assign(:venue, Venue.create!(
-      :name => "Name",
-      :address => "Address",
-      :phone_number => "Phone Number"
-    ))
+    @venue = assign(:venue, create(:venue))
   end
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Address/)
-    expect(rendered).to match(/Phone Number/)
+    expect(rendered).to include(@venue.name)
+    expect(rendered).to include(@venue.description)
   end
 end

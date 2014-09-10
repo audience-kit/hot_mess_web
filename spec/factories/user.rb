@@ -3,6 +3,7 @@ FactoryGirl.define do
     facebook_id     10203595242113373
     email           'rickmark@outlook.com'
     is_admin        false
+    person
 
     factory :admin do
       is_admin      true
