@@ -41,6 +41,8 @@ gem 'resque'
 
 gem 'timezone'
 
+gem 'compass'
+
 gem 'chronic'
 
 # Use RSpec for testing
