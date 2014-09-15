@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def mobile_create
+  def token
     params.require(:state)
     params.require(:facebook_auth_token)
 
