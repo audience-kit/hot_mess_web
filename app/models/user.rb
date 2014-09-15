@@ -14,7 +14,7 @@ class User
   validates_associated :person
 
 
-  def update_from_facebook(me)
+  def update_from_facebook(me = nil)
 
     if me.nil?
       me = facebook_graph.get_object('me').with_indifferent_access
