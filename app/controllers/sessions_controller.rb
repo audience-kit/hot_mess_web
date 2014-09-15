@@ -41,6 +41,33 @@ class SessionsController < ApplicationController
     end
   end
 
+  def mobile_create
+    params.require(:state)
+    params.require(:facebook_auth_token)
+
+    long_access_token = facebook_oauth.exchange_access_token_info(params[:facebook_auth_token])
+
+    graph_api = Koala::Facebook::API.new(long_access_token['access_token'])
+    me = graph_api.get_object('me').with_indifferent_access
+
+    #access_token_info = facebook_oauth.get_access_token_info(long_access_token['access_token'])
+    @user = User.includes(:person).find_or_initialize_by(facebook_id: me['id'])
+    @user.facebook_access_token = long_access_token['access_token']
+    @user.facebook_expires_in = long_access_token['expires'].to_i
+
+    @user.update_from_facebook me
+
+    @user.save
+
+    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
+    encrypted_user_id = crypt.encrypt_and_sign(@user.to_param)
+
+    response_object = { auth_token: encrypted_user_id,
+                        user_id: @user.to_param }
+
+    render json: response_object
+  end
+
   def destroy
     session.clear
 

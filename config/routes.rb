@@ -78,7 +78,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :session
+  resource :session do
+    post :mobile_create, constraints: { format: "json" }
+  end
 
   get 'dashboard' => 'home#dashboard'
 

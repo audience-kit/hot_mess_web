@@ -14,8 +14,11 @@ class User
   validates_associated :person
 
 
-  def update_from_facebook
-    me = facebook_graph.get_object('me').with_indifferent_access
+  def update_from_facebook(me)
+
+    if me.nil?
+      me = facebook_graph.get_object('me').with_indifferent_access
+    end
 
     Rails.logger.debug "\tQuery for Facebook 'me' object #{me.inspect}"
 
