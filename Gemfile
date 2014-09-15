@@ -11,7 +11,7 @@ group :development, :assets do
 
   gem 'sass'
   gem 'coffee-script'
-  gem 'therubyracer'
+  gem 'therubyracer', '0.11.4'
 # Use SCSS for stylesheets
   gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
