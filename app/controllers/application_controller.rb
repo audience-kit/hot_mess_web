@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_user
 
+  @@crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
+
   def facebook_signed_message(request)
     facebook_oauth.parse_signed_request request
   end
@@ -40,12 +42,25 @@ class ApplicationController < ActionController::Base
       return
     end
 
+    case request.format
+      when Mime::XML, Mime::ATOM, Mime::JSON
+        user = authenticate_with_http_token do |token, options|
+          decoded_user_id = @@crypt.decrypt_and_verify(token)
+          User.find(decoded_user_id)
+        end
 
-    if session[:user_id].nil?
-      redirect_to root_path
-    else
-      logger.debug "\tSession User ID => #{session[:user_id].inspect}"
-      @user ||= User.find(BSON::ObjectId.from_string(session[:user_id]))
+        if user
+          @user = user
+        else
+          request_http_token_authentication
+        end
+      else
+        if session[:user_id].nil?
+          redirect_to root_path and return false
+        else
+          logger.debug "\tSession User ID => #{session[:user_id].inspect}"
+          @user ||= User.find(BSON::ObjectId.from_string(session[:user_id]))
+        end
     end
   end
 end

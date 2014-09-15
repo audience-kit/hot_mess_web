@@ -10,8 +10,6 @@ RSpec.describe SessionsController, :type => :controller do
 
       response_object = JSON.parse(response.body)
 
-      puts response_object.inspect
-      
       expect(response_object['auth_token']).to_not be_nil
       expect(response_object['user_id']).to_not be_nil
     end
