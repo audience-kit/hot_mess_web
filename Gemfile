@@ -8,7 +8,6 @@ gem 'sqlite3'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 
 group :development, :assets do
-
   gem 'sass'
   gem 'coffee-script'
   gem 'therubyracer', '0.11.4'
