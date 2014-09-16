@@ -17,7 +17,7 @@ FacebookAuthentication =
         })
       else
         FB.login this.login, {
-          scope: "email,public_profile,user_friends,user_events,rsvp_event",
+          scope: "email,public_profile,user_friends,user_events",
           return_scopes: true
         }
 

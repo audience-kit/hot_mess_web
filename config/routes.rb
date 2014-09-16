@@ -87,6 +87,7 @@ Rails.application.routes.draw do
   get 'me' => 'people#show'
 
   get 'facebook_config.js' => 'home#facebook_config', format: 'js'
+  get 'privacy' => 'home#privacy'
 
   root 'home#index'
 end
