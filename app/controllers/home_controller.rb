@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :facebook_config
-  skip_before_action :set_user, only: [ :index, :facebook_config ]
+  skip_before_action :set_user, only: [ :index, :facebook_config, :privacy ]
 
   # GET /homes
   # GET /homes.json
@@ -21,6 +21,10 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.html
     end
+  end
+
+  def privacy
+
   end
 
   def facebook_config

@@ -41,9 +41,7 @@
           .mastfoot
             .inner
               %p
-                Cover template for
                 = succeed "," do
-                  %a{:href => "http://getbootstrap.com"} Bootstrap
-                by
+                  = "Copyright &copy; #{DateTime.now.year} - Hot Mess Productions".html_safe
                 = succeed "." do
-                  %a{:href => "https://twitter.com/mdo"} @mdo
+                  %a{ href: "/privacy" } Privacy Policy
