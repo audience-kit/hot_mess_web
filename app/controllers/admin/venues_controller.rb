@@ -90,7 +90,7 @@ class Admin::VenuesController < Admin::AdminController
       @venue.imported_by = user
     end
 
-    photo = graph.get_connections(@venue.facebook_id, "picture?redirect=false")['data']
+    photo = graph.get_connections(@venue.facebook_id, "picture?redirect=false&type=large")['data']
     logger.debug "\tGot Facebook photo for page => #{photo.inspect}"
     @venue.build_picture unless @venue.picture
 
