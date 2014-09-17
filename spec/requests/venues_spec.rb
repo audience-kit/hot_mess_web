@@ -3,8 +3,18 @@ require 'rails_helper'
 RSpec.describe "Venues", :type => :request do
   include_context 'session'
 
+  let (:user) {
+    create(:user)
+  }
+
   let (:api_token) {
-    ActionController::HttpAuthentication::Token.encode_credentials('cG5oTVBUd21qcFFUUjBhWUYxNzhWcTJZbWthdVZDQzhtZ3NRMThFUlV4MUpJRWNCbkg3MTFOc0lTcUhOaWNoSC0tRWxPNzFkNnVKSDN5VWV1MTBZM1o5Zz09--12e02e6d61fb9b57d52cff32f6274873daf55279')
+    user_id = user.to_param
+    user_token = crypt.encrypt_and_sign user_id
+    ActionController::HttpAuthentication::Token.encode_credentials user_token
+  }
+
+  let (:crypt) {
+    ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
   }
 
   describe "GET /venues" do

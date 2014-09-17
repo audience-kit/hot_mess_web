@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
-  <component name="IdProvider" IDEtalkID="0AE97D11A8A0571F236345F1F5D8DC13" />
-  <component name="ProjectRootManager" version="2" project-jdk-name="ruby-2.1.2-p95" project-jdk-type="RUBY_SDK" />
-=======
   <component name="DBNavigator.Project.ConnectionManager">
     <connections />
   </component>
@@ -381,8 +377,5 @@
       </environment>
     </general-settings>
   </component>
-  <component name="IdProvider" IDEtalkID="D197F73CEBE5B5A76043F0CCD3FFF1DB" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" assert-keyword="false" jdk-15="false" project-jdk-name="ruby-2.1.2-p95" project-jdk-type="RUBY_SDK" />
->>>>>>> 0a2e8d54fc90df2e92405cf64cb1c35e0aae88a7
 </project>
 

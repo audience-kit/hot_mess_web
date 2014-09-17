@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe VenuesController, :type => :controller do
   include_context 'session'
 
+  let (:api_token) {
+    user_token = crypt.encrypt_and_sign valid_user_session[:user_id]
+    ActionController::HttpAuthentication::Token.encode_credentials user_token
+  }
+
+  let (:crypt) {
+    ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
+  }
+
   describe "GET index" do
     it "assigns all venues as @venues" do
       venue = create(:venue)
@@ -11,10 +20,9 @@ RSpec.describe VenuesController, :type => :controller do
     end
 
     it "should allow json pull with authorization token" do
-      auth_token = 'cG5oTVBUd21qcFFUUjBhWUYxNzhWcTJZbWthdVZDQzhtZ3NRMThFUlV4MUpJRWNCbkg3MTFOc0lTcUhOaWNoSC0tRWxPNzFkNnVKSDN5VWV1MTBZM1o5Zz09--12e02e6d61fb9b57d52cff32f6274873daf55279'
       venue = create(:venue)
 
-      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(auth_token)
+      request.env['HTTP_AUTHORIZATION'] = api_token
       get :index, { format: :json }
 
       expect(assigns(:venues)).to include(venue)
