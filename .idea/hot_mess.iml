@@ -104,7 +104,6 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-<<<<<<< HEAD
     <configuration default="false" name="test: hot_mess" type="RakeRunConfigurationType" factoryName="Rake">
       <module name="hot_mess" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -131,8 +130,6 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
       <method />
     </configuration>
-=======
->>>>>>> 0a2e8d54fc90df2e92405cf64cb1c35e0aae88a7
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <content url="file://$MODULE_DIR$">
