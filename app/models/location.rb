@@ -6,8 +6,8 @@ class Location
   field :state, type: String
   field :street, type: String
   field :zip, type: String
-  field :latitude, type: Integer
-  field :longitude, type: Integer
+  field :latitude, type: Float
+  field :longitude, type: Float
 
   def to_s
     "#{self.street} #{self.city}, #{self.state} #{self.zip}"
