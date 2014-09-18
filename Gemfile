@@ -55,11 +55,13 @@ gem 'chronic'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'capistrano-rails'
 end
 
 # Use Foreman for process startup
 gem 'foreman'
 
+gem 'newrelic_rpm'
 gem 'koala'
 
 gem 'database_cleaner'
