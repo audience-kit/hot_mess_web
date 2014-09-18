@@ -1,5 +1,5 @@
 json.id @venue.id.to_s
-json.extract! @venue, :name, :address, :phone, :created_at, :updated_at
+json.extract! @venue, :facebook_id, :name, :phone, :about, :description, :created_at, :updated_at
 
 if @venue.picture
   json.picture do
