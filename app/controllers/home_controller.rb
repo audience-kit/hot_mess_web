@@ -18,6 +18,8 @@ class HomeController < ApplicationController
   end
 
   def dashboard
+    @venues = Venue.all
+
     respond_to do |format|
       format.html
     end

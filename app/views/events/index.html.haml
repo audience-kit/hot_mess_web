@@ -1,5 +1,7 @@
-%h1.page-header Listing events
+%h1.page-header Seattle Events
 
-- @events.each do |event|
-  .row.event
-    %p= link_to event.name, event
+%ul.list-group
+  - @events.each do |event|
+    %li.list-group-item
+      %h4= link_to event.name, event
+      %p= event.description

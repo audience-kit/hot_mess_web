@@ -1,0 +1,29 @@
+%h1.page-header You're Seattle Dashboard
+
+.row
+  .col-md-8
+    .panel.panel-primary
+      .panel-heading Happening Now
+      .panel-body
+        Welcome to the pulse of Seattle nightlife.  We're currently in the process of building the site, but we have
+        decided to release early, release often and RAGE!  Feedback controls are coming soon to help allow everyone to
+        have a part in the development of Hot Mess.  Have fun, get messy and Make a Scene!
+      %ul.list-group
+        - @venues.each do |venue|
+          %li.list-group-item.clearfix
+            .pull-left( style="margin-right: 8px;" )
+              - if venue.picture
+                = image_tag venue.picture.url
+              - else
+                %div( style="width: 32px; height: 32px; background-color: #888;")
+            %h5= link_to venue.name, venue
+            %p{ class: (venue.about.nil? ? 'text-muted' : nil )}
+              = venue.about || "No description..."
+  .col-md-4
+    .panel.panel-default
+      .panel-heading Whats New
+      .panel-body
+        .row.text-center
+          %p The Hot Mess app for Android is now available on the Google Play store.  Download and take Hot Mess with you when your on the move...
+          = link_to 'https://play.google.com/store/apps/details?id=club.hotmess.app' do
+            = image_tag 'en_google_play.png', alt: "Get it on Google Play"

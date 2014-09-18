@@ -1,2 +1,12 @@
-%h1 Person#index
-%p Find me in app/views/person/index.html.haml
+%h1.page-header Seattle People
+
+.row
+  %ul.list-group
+    - if @people.any?
+      - @people.each do |person|
+        - unless person.name.nil?
+          %li.list-group-item
+            = person.name
+    - else
+      %li.list-group-item-info
+        %h4 There are no people in this list

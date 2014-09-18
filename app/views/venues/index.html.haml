@@ -1,18 +1,17 @@
 .row
   %h1.page-header Seattle Venues
 
-- @venues.each do |venue|
-  .row.venue
-    .col-md-12
-      .pull-left( style="margin-right: 16px" )
+%ul.list-group
+  - @venues.each do |venue|
+    %li.list-group-item.clearfix
+      .pull-left( style="margin-right: 16px;" )
         - if venue.picture
-          %img{ src: venue.picture.url }
+          = image_tag venue.picture.url
         - else
           %div( style="width: 32px; height: 32px; background-color: #888;")
 
-      .pull-left
-        %p= link_to venue.name, venue
-        - if venue.about
-          %p= truncate venue.about, length: 140
-        - else
-          %p.text-muted No Description
+      %h4= link_to venue.name, venue
+      - if venue.about
+        %p= venue.about
+      - else
+        %p.text-muted No Description
