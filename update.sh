@@ -1,4 +1,9 @@
-systemctl stop hot_mess.target
+#!/bin/sh
+
+export RAILS_ENV=production
+
 git pull
 chgrp -hR http .
-systemctl start hot_mess.target
+bundle install
+bundle exec rake assets:precompile
+systemctl restart hot_mess.target
