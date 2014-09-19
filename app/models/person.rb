@@ -1,5 +1,6 @@
 class Person
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :facebook_id, type: Integer
   field :name, type: String
