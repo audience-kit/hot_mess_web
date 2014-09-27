@@ -14,6 +14,6 @@ RSpec.describe "venues/index", :type => :view do
     assert_select '.venue img', count: 2
 
     expect(rendered).to include(@venues[0].name)
-    expect(rendered).to include(ERB::Util.html_escape_once(@venues[0].about))
+    expect(rendered).to include(@venues[0].about)
   end
 end

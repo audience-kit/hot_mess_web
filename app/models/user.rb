@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :facebook_id, type: Integer
   field :facebook_access_token, type: String
