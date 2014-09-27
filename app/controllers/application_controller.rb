@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token, if: :json_request?
   before_filter :set_user
+  before_filter :ignore_newrelic
 
   @@crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
 
@@ -48,8 +49,8 @@ class ApplicationController < ActionController::Base
     end
 
     case request.format
-      when Mime::XML, Mime::ATOM, Mime::JSON
-        user = authenticate_with_http_token do |token, options|
+      when Mime::XML, Mime::JSON
+        user = authenticate_with_http_token do |token, _|
           decoded_user_id = @@crypt.decrypt_and_verify(token)
           User.find(decoded_user_id)
         end
@@ -66,6 +67,12 @@ class ApplicationController < ActionController::Base
           logger.debug "\tSession User ID => #{session[:user_id].inspect}"
           @user ||= User.find(BSON::ObjectId.from_string(session[:user_id]))
         end
+    end
+  end
+
+  def ignore_newrelic
+    if request.user_agent.include? 'NewRelicPinger'
+      NewRelic::Agent.ignore_transaction
     end
   end
 end
