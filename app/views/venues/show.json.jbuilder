@@ -1,5 +1,6 @@
-json.id @venue.id.to_s
-json.extract! @venue, :facebook_id, :name, :phone, :about, :description, :created_at, :updated_at
+json.partial! 'shared/entity', entity: @venue
+
+json.extract! @venue, :facebook_id, :name, :phone, :about, :description
 
 if @venue.picture
   json.picture do

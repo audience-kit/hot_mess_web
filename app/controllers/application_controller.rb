@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ignore_newrelic
-    if request.user_agent.include? 'NewRelicPinger'
+    if (request.user_agent || '').include? 'NewRelicPinger'
       NewRelic::Agent.ignore_transaction
     end
   end
