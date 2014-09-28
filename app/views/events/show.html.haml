@@ -11,4 +11,5 @@
     .panel.panel-default
       .panel-heading Venue
       .panel-body
-        = @event.venue.name
+        - if @event.venue
+          = @event.venue.name
