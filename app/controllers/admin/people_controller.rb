@@ -6,6 +6,12 @@ class Admin::PeopleController < Admin::AdminController
   def show
     @person = Person.find(params[:id])
   end
+  
+  def import
+    params.require(:import_person).require(:page)
+    
+    
+  end
 
   def new
     @person = Person.new

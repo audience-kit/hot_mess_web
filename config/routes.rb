@@ -1,10 +1,34 @@
 Rails.application.routes.draw do
+  
+  namespace :admin do
+    resources :locales
+
+    resources :people do
+      post :import, on: :collection
+    end
+
+    resources :venues do
+      post :import, on: :collection
+    end
+
+    resources :events do
+      post :import, on: :collection
+    end
+  end
 
   resources :events
-
   resources :people
-
   resources :venues
+  
+  resource :session do
+    post :token, constraints: { format: "json" }
+  end
+
+  get 'facebook_config.js'  =>  'home#facebook_config', format: 'js'
+  get 'dashboard'           =>  'home#dashboard'
+  get 'me'                  =>  'people#show'
+  get 'privacy'             =>  'home#privacy'
+  root                          'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -60,34 +84,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  namespace :admin do
-    resources :locales
-
-    resources :people do
-      post :import, on: :collection
-    end
-
-    resources :venues do
-      post :import, on: :collection
-    end
-
-    resources :events do
-      post :import, on: :collection
-
-    end
-  end
-
-  resource :session do
-    post :token, constraints: { format: "json" }
-  end
-
-  get 'dashboard' => 'home#dashboard'
-
-  get 'me' => 'people#show'
-
-  get 'facebook_config.js' => 'home#facebook_config', format: 'js'
-  get 'privacy' => 'home#privacy'
-
-  root 'home#index'
+  
 end

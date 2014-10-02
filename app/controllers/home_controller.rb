@@ -26,7 +26,6 @@ class HomeController < ApplicationController
   end
 
   def privacy
-
   end
 
   def facebook_config

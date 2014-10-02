@@ -53,8 +53,8 @@ class Admin::VenuesController < Admin::AdminController
   end
 
   def import
-    params.require(:import_venue_page)
-    page_name = params[:import_venue_page]
+    params.require(:venue_import).require(:page)
+    page_name = params[:venue_import][:page]
     logger.debug "\tRequested to import Facebook page #{page_name}"
 
     graph = facebook_graph

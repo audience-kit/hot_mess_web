@@ -1,12 +1,17 @@
 %h1.page-header Listing People
 
-%table.table
-  %thead
-    %tr
-      %th Name
-  %tbody
-    - @people.each do |person|
+.panel.panel-default
+  .panel-heading People  
+  %table.table
+    %thead
       %tr
-        %td= link_to person.name, [:admin, person]
-
+        %th Name
+    %tbody
+      - @people.each do |person|
+        %tr
+          %td= link_to person.name, [:admin, person]
+  .panel-footer
+    - if is_admin?
+      = link_to 'New Person', new_admin_person_path, class: 'btn btn-primary'
+    
 
