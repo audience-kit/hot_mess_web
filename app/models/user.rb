@@ -12,7 +12,6 @@ class User
 
   has_one                         :person,          autobuild: true
 
-  validates_presence_of           :email
   validates_presence_of           :person
   validates_associated            :person
 
