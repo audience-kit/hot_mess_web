@@ -104,7 +104,7 @@ GEM
     hashie (2.1.2)
     hike (1.2.3)
     hitimes (1.2.2)
-    httmultiparty (0.3.15)
+    httmultiparty (0.3.16)
       httparty (>= 0.7.3)
       mimemagic
       multipart-post
@@ -311,7 +311,6 @@ DEPENDENCIES
   sass-rails
   sdoc
   soundcloud
-  spring
   sqlite3
   therubyracer
   timezone

@@ -1,12 +1,13 @@
 FactoryGirl.define do
   factory :person do
-    first_name "Jonny"
-    last_name "Appleseed"
+
+    facebook_id     10203595242113373
+
     name "Jonny Appleseed"
-    public? false
+    is_public false
     
     factory :public_person do
-      public? true
+      is_public true
     end
   end
 end

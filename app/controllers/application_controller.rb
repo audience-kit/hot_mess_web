@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
 
       session[:user_id]     = user.id.to_s
       session[:is_admin]    = user.is_admin
-      session[:first_name]  = user.person.first_name
-      session[:last_name]   = user.person.last_name
+      session[:first_name]  = user.first_name
+      session[:last_name]   = user.last_name
       session[:name]        = user.person.name
       session[:person_id]   = user.person.id.to_s
 

@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
       logger.debug "\tReceived Facebook signed authentication message #{auth_response.inspect}"
 
       user_id = facebook_session_params[:authResponse][:userID].to_i
-      @user = User.includes(:person).find_or_initialize_by(facebook_id: user_id)
+      @person = Person.find_or_initialize_by(facebook_id: user_id)
+      @user = @person.user
 
       access_token_info = facebook_oauth.get_access_token_info(auth_response['code'])
       logger.debug "\tGot access token info from Facebook #{access_token_info.inspect}"
@@ -26,11 +27,12 @@ class SessionsController < ApplicationController
       @user.update_from_facebook
 
       @user.save
+      @person.save
 
       session[:user_id]     = user.id.to_s
       session[:is_admin]    = user.is_admin
-      session[:first_name]  = user.person.first_name
-      session[:last_name]   = user.person.last_name
+      session[:first_name]  = user.first_name
+      session[:last_name]   = user.last_name
       session[:name]        = user.person.name
       session[:person_id]   = user.person.id.to_s
 
@@ -51,13 +53,16 @@ class SessionsController < ApplicationController
     me = graph_api.get_object('me').with_indifferent_access
 
     #access_token_info = facebook_oauth.get_access_token_info(long_access_token['access_token'])
-    @user = User.includes(:person).find_or_initialize_by(facebook_id: me['id'])
+    facebook_id = me['id']
+    @person = Person.find_or_initialize_by(facebook_id: facebook_id)
+    @user = @person.user
     @user.facebook_access_token = long_access_token['access_token']
     @user.facebook_expires_in = long_access_token['expires'].to_i
 
     @user.update_from_facebook me
 
     @user.save
+    @person.save
 
     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
     encrypted_user_id = crypt.encrypt_and_sign(@user.to_param)

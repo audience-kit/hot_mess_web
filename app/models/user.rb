@@ -2,19 +2,24 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :facebook_id, type: Integer
-  field :facebook_access_token, type: String
-  field :facebook_expires_in, type: Integer
-  field :email, type: String
-  field :is_admin, type: Boolean, default: false
+  field :first_name,              type: String
+  field :last_name,               type: String
+  field :middle_name,             type: String
+  field :facebook_access_token,   type: String
+  field :facebook_expires_in,     type: Integer
+  field :email,                   type: String
+  field :is_admin,                type: Boolean,    default: false
 
-  has_one :person
+  has_one                         :person,          autobuild: true
 
-  validates_presence_of :facebook_id
-  validates_presence_of :person
-  validates_associated :person
+  validates_presence_of           :email
+  validates_presence_of           :person
+  validates_associated            :person
 
-
+  def to_s
+    self.name
+  end
+  
   def update_from_facebook(me = nil)
 
     if me.nil?
@@ -32,14 +37,6 @@ class User
     self.person.update_from_facebook me
 
     self.person.save
-  end
-
-  def name
-    person.name
-  end
-
-  def to_s
-    self.name
   end
 
   def facebook_graph

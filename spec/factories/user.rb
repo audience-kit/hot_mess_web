@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    facebook_id     10203595242113373
     email           'rickmark@outlook.com'
+    first_name "Jonny"
+    last_name "Appleseed"
     is_admin        false
     person
 

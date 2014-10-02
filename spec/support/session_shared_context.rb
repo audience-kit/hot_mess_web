@@ -1,5 +1,5 @@
 shared_context 'session' do
-  before(:all) do
+  before(:each) do
     @user = create(:user)
     @admin = create(:admin)
   end
