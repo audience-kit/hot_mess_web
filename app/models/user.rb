@@ -33,7 +33,7 @@ class User
       self.person = Person.new
     end
 
-    self.person.update_from_facebook me
+    self.person.assign_facebook_attributes me
 
     self.person.save
   end

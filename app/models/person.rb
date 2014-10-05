@@ -23,14 +23,5 @@ class Person
   
   scope :public, ->{ where(is_public: true) }
   
-  facebook_field_mapping ({
-    facebook_id: :id,
-    facebook_verified: :verified,
-    facebook_likes: :likes,
-    user: {
-        first_name: :first_name ,
-        middle_name: :middle_name,
-        last_name: :last_name
-    }
-  })
+  facebook_map_attributes facebook_id: :id, facebook_verified: :verified, facebook_likes: :likes
 end

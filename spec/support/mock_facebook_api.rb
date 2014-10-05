@@ -12,6 +12,7 @@ module Mock
       # expect(oauth_double).to receive(:get_app_access_token).and_return(Mock::Facebook::APP_ACCESS_TOKEN)
       # expect(graph_double).to receive(:new).with(Mock::Facebook::APP_ACCESS_TOKEN).and_return(Mock::Facebook::API.new)
       state.stub_const("Koala::Facebook::API", Mock::Facebook::API)
+      state.stub_const("Koala::Facebook::OAuth", Mock::Facebook::OAuth)
     end
 
     class API
@@ -22,7 +23,18 @@ module Mock
       def get_object(path)
         resposne_path = File.join(RSpec.configuration.fixture_path, "#{path}.json")
 
-        JSON.parse(File.read(resposne_path))['data']
+        result = JSON.parse(File.read(resposne_path))
+        
+        return result['data'] || result
+      end
+    end
+    
+    class OAuth
+      def initialize(app_id, app_secret)
+      end
+      
+      def exchange_access_token_info(token)
+        token
       end
     end
   end

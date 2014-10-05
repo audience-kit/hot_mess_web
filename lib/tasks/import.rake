@@ -33,13 +33,28 @@ module Import
 
     venue = Venue.find_or_initialize_by(facebook_id: v)
 
-    venue_object = facebook_graph.get_object(v)
-    puts venue_object.inspect
+    begin
+      venue_object = facebook_graph.get_object(v)
+    rescue Koala::Facebook::ClientError
+      puts "Unable to import venue #{v}, it may be inaccessable to the application."
+      return
+    end
+    
+    venue.assign_facebook_attributes(venue_object)
   end
 
   def self.import_person(p)
     puts "Importing person with Id #{p}"
 
     person = Person.find_or_initialize_by(facebook_id: p)
+    
+    begin
+      person_objcet = facebook_graph.get_object(p)
+    rescue Koala::Facebook::ClientError
+      puts "Unable to import person #{p}, it may be inaccessable to the application."
+      return
+    end
+    
+    person.assign_facebook_attributes(person_object)
   end
 end
