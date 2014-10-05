@@ -1,7 +1,8 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-
+  include Concerns::FacebookImportable
+  
   field :first_name,              type: String
   field :last_name,               type: String
   field :middle_name,             type: String
@@ -33,7 +34,7 @@ class User
       self.person = Person.new
     end
 
-    self.person.assign_facebook_attributes me
+    self.assign_facebook_attributes me
 
     self.person.save
   end
