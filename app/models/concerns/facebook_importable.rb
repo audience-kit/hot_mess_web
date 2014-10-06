@@ -34,7 +34,7 @@ module Concerns::FacebookImportable
     end
     
     def facebook_map_attribute(key, value)
-      @facebook_mapping[key] = value
+      @facebook_mapping[key.to_sym] = value.to_sym
     end
     
     def facebook_mapping
