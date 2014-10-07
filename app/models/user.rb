@@ -16,27 +16,14 @@ class User
   validates_presence_of           :person
   validates_associated            :person
 
-  def to_s
-    self.name
+  delegate :to_s, to: :name
+  
+  def update_from_facebook(me_graph = facebook_me_graph)
+    self.assign_facebook_attributes me_graph
   end
   
-  def update_from_facebook(me = nil)
-
-    if me.nil?
-      me = facebook_graph.get_object('me').with_indifferent_access
-    end
-
-    Rails.logger.debug "\tQuery for Facebook 'me' object #{me.inspect}"
-
-    self.email = me[:email]
-
-    if self.person.nil?
-      self.person = Person.new
-    end
-
-    self.assign_facebook_attributes me
-
-    self.person.save
+  def facebook_me_graph
+    facebook_graph.get_object('me').with_indifferent_access
   end
 
   def facebook_graph

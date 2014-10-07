@@ -1,6 +1,7 @@
 class Venue
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Concerns::FacebookImportable
 
   field :facebook_id, type: Integer
   field :name, type: String
@@ -13,6 +14,7 @@ class Venue
   field :phone, type: String
   field :imported_at, type: DateTime
   field :link, type: String
+  field :facebook_username, type: String
 
   belongs_to :imported_by, class_name: 'User'
   belongs_to :picture
@@ -22,12 +24,16 @@ class Venue
 
   validates_presence_of :name
   validates_associated :picture
+  
+  facebook_map_attributes :id => :facebook_id, :username => :facebook_username
 
   def facebook_url
-    if self['username']
-      "http://facebook.com/#{self['username']}"
-    elsif self['link']
-      self.link
-    end
+    return "http://facebook.com/#{self.facebook_username}" if self.facebook_username
+      
+    self.link
+  end
+  
+  def import_facebook_events(koala_client)
+    events = koala_client.get_object("#{facebook_id}/events")
   end
 end

@@ -1,11 +1,9 @@
 class Event
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Attributes::Dynamic
   include Concerns::FacebookImportable
 
-
-
+  field :facebook_id,         type: Integer
   field :name,                type: String
   field :description,         type: String
   field :start_time,          type: DateTime
@@ -18,4 +16,6 @@ class Event
   belongs_to :person
 
   validates_presence_of :name
+  
+  facebook_map_attributes :id => :facebook_id
 end

@@ -18,11 +18,13 @@ module Concerns::FacebookImportable
     
     assign_attributes(selected_keys)
     
+    remaining_keys = attributes.reject { |k, v| selected_keys.include? k }
+    
     self.class.relations.each do |key, relation|
       value = self.send key.to_sym
       
       if value && value.class.ancestors.include?(Concerns::FacebookImportable)
-        value.assign_facebook_attributes attributes
+        value.assign_facebook_attributes remaining_keys
       end
     end
     self.instance_variable_set FACEBOOK_ASSIGNING_ATTRIBUTES, false
