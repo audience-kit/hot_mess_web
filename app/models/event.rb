@@ -3,7 +3,6 @@ class Event
   include Mongoid::Timestamps
   include Concerns::FacebookImportable
 
-  field :facebook_id,         type: Integer
   field :name,                type: String
   field :description,         type: String
   field :start_time,          type: DateTime
@@ -18,4 +17,6 @@ class Event
   validates_presence_of :name
   
   facebook_map_attributes :id => :facebook_id
+  
+  scope :after_now, ->{ where( :start_time.gt DateTime.new )}
 end

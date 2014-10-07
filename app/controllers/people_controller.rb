@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   def index
-    @people = Person.public
+    @people = Person.are_public
 
     respond_to do |format|
       format.html

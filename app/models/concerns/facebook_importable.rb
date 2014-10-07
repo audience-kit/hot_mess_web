@@ -5,10 +5,11 @@ module Concerns::FacebookImportable
   
   included do
     @facebook_mapping = Hash.new
+    field :facebook_id,          type: Integer
+    field :other_facebook_ids,   type: Array
   end
   
   def assign_facebook_attributes(attributes)
-
     return if self.instance_variable_get FACEBOOK_ASSIGNING_ATTRIBUTES
     self.instance_variable_set FACEBOOK_ASSIGNING_ATTRIBUTES, true
     
@@ -41,6 +42,18 @@ module Concerns::FacebookImportable
     
     def facebook_mapping
       @facebook_mapping
+    end
+    
+    def find_by_facebook_id(id)
+      by_id = self.where(facebook_id: id).to_a
+  
+      return by_id.first if by_id.any?
+  
+      with_id = self.where(:other_facebook_ids.in => [ id ]).to_a
+      
+      return with_id.first if with_id.any?
+      
+      return nil
     end
   end
 end

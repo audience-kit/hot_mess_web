@@ -3,7 +3,6 @@ class Venue
   include Mongoid::Timestamps
   include Concerns::FacebookImportable
 
-  field :facebook_id, type: Integer
   field :name, type: String
   field :about, type: String
   field :attire, type: String
@@ -36,4 +35,6 @@ class Venue
   def import_facebook_events(koala_client)
     events = koala_client.get_object("#{facebook_id}/events")
   end
+  
+
 end

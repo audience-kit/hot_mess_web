@@ -33,6 +33,7 @@ class FacebookImporter
     
     venues = data['venues'] || []
     people = data['people'] || []
+    venue_other_ids = data['venue_other_ids'] || []
 
     puts "Importing #{venues.count} venues and #{people.count} people."
     
@@ -41,7 +42,7 @@ class FacebookImporter
       puts "Importing in user context #{user['name']}"
     end
 
-    import_venues(venues)
+    import_venues(venues, venue_other_ids)
     import_people(people)
     
     Venue.all.each {|v| v.import_facebook_events(self.facebook_graph) }
@@ -54,13 +55,20 @@ class FacebookImporter
     end
   end
 
-  def import_venues(venue_ids = [])
+  def import_venues(venue_ids = [], venue_other_ids = {})
     import_objects venue_ids do |venue_graph|
       puts "Importing venue #{venue_graph['id']}"
       
       venue = Venue.find_or_initialize_by(facebook_id: venue_graph['id'].to_i)
     
       venue.assign_facebook_attributes(venue_graph)
+      
+      other_ids_for = venue_other_ids[venue.facebook_id] || []
+      other_ids_for.each do |id|
+        venue.other_facebook_ids ||= [] 
+        venue.other_facebook_ids << id unless venue.other_facebook_ids.include?(id)
+      end
+      
       venue.save
       
       venue

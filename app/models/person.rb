@@ -11,7 +11,6 @@ class Person
   field :timezone,            type: Integer
   field :gender,              type: String
   field :link,                type: String
-  field :facebook_id,         type: Integer
   field :facebook_verified,   type: Boolean
   field :facebook_likes,      type: Integer
   field :soundcloud_id,       type: Integer
@@ -48,11 +47,11 @@ class Person
     Rails.logger.info "Found #{open_events.count} OPEN events"
     open_events.each do |event|
       if event['venue'] && event['venue']['id']
-        venues = Venue.where(facebook_id: event['venue']['id'].to_i)
-        
-        if venues.any?
-          venue = venues.first
-          Rails.logger.debug "Importing event #{event['name']} for venue #{venue.name}"
+        puts "Attempting to find Venue #{event['venue']['id']}"
+        venue = Venue.find_by_facebook_id event['venue']['id'].to_i
+
+        if venue
+          Rails.logger.info "Importing event #{event['name']} for venue #{venue.name}"
           event_model = Event.find_or_initialize_by(facebook_id: event['id'].to_i)
           event_model.venue = venue
           event_model.person = Person.find_or_initialize_by(facebook_id: event['owner']['id'].to_i)
