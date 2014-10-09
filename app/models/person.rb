@@ -16,6 +16,8 @@ class Person
   field :soundcloud_id,       type: Integer
   field :is_public,           type: Boolean,    default: false
   
+  facebook_id
+  
   belongs_to :user,           autobuild: true
   
   validates_presence_of :name

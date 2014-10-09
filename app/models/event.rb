@@ -11,6 +11,8 @@ class Event
   field :owner_id,            type: Integer
   field :minimum_age,         type: Integer
   
+  facebook_id
+  
   belongs_to :venue
   belongs_to :person
 

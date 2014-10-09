@@ -5,8 +5,6 @@ module Concerns::FacebookImportable
   
   included do
     @facebook_mapping = Hash.new
-    field :facebook_id,          type: Integer
-    field :facebook_ids,   type: Array
   end
   
   def assign_facebook_attributes(attributes)
@@ -31,7 +29,37 @@ module Concerns::FacebookImportable
     self.instance_variable_set FACEBOOK_ASSIGNING_ATTRIBUTES, false
   end
   
+  def update_facebook_pictures
+    return unless self.respond_to? :pictures
+    
+    Rails.logger.info "Updating picture for #{self.to_s}"
+    self.pictures = []
+    
+    picture_graphs = Facebook.application_graph.batch do |batch|    
+      Picture::PICTURE_TYPES.each do |type|
+        batch.get_object("/#{self.facebook_id}/picture?redirect=false&type#{type.to_s}")
+      end
+    end
+    
+    picture_graphs = picture_graphs.zip(Picture::PICTURE_TYPES)
+    picture_graphs.each do |graph, type|
+      picture = self.pictures.build
+      picture.type = type
+      picture.assign_facebook_attributes graph['data']
+    end
+    
+    self.save
+  end
+  
   module ClassMethods
+    def facebook_ids
+      field :facebook_ids,         type: Array
+    end
+    
+    def facebook_id
+      field :facebook_id,          type: Integer
+    end
+    
     def facebook_map_attributes(mapping)
       @facebook_mapping.merge!(mapping)
     end
@@ -45,13 +73,17 @@ module Concerns::FacebookImportable
     end
     
     def find_by_facebook_id(id)
-      by_id = self.where(facebook_id: id).to_a
+      if self.fields['facebook_id']
+        by_id = self.where(facebook_id: id).to_a
   
-      return by_id.first if by_id.any?
+        return by_id.first if by_id.any?
+      end
   
-      with_id = self.where(:facebook_ids.in => [ id ]).to_a
+      if self.fields['facebook_ids']
+        with_id = self.where(:facebook_ids.in => [ id ]).to_a
       
-      with_id.any? ? with_id.first : nil
+        with_id.any? ? with_id.first : nil
+      end
     end
     
     def import_from_facebook(id, graph = nil)

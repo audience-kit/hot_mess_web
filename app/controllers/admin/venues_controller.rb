@@ -5,7 +5,7 @@ class Admin::VenuesController < Admin::AdminController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.includes(:picture).all
+    @venues = Venue.all
   end
 
   # GET /venues/1
