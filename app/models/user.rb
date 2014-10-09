@@ -27,6 +27,24 @@ class User
   end
 
   def facebook_graph
-    @facebook_graph ||= Koala::Facebook::API.new(self.facebook_access_token)
+    @facebook_graph ||= Koala::Facebook::API.new(self.facebook_access_token) if self.facebook_access_token
+  end
+  
+  def self.find_by_facebook_token(token)
+    token = Facebook.oauth.exchange_access_token_info(token)
+    graph_api = Koala::Facebook::API.new(token['access_token'])
+    me = graph_api.get_object('me')
+    
+    person = Person.find_or_initialize_by facebook_id: me['id'].to_i
+    
+    person.user.facebook_access_token = token['access_token']
+    person.user.facebook_expires_in = token['expires'].to_i
+    
+    person.assign_facebook_attributes me
+
+    person.save
+    person.user.save
+    
+    person.user
   end
 end

@@ -6,25 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_user
   before_filter :ignore_newrelic
 
-  @@crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base)
-
   def json_request?
     request.format.json?
-  end
-
-  def facebook_signed_message(request)
-    facebook_oauth.parse_signed_request request
-  end
-
-  def facebook_oauth
-    facebook_secrets = Rails.application.secrets['facebook']
-    @facebook_oauth ||= Koala::Facebook::OAuth.new(facebook_secrets['app_id'], facebook_secrets['secret'])
-  end
-
-  def facebook_graph
-    @@facebook_app_access_token ||= facebook_oauth.get_app_access_token
-    logger.debug "\tFacebook App Access Token => #{@@facebook_app_access_token}"
-    @facebook_graph = Koala::Facebook::API.new(@@facebook_app_access_token)
   end
 
   def user
@@ -51,7 +34,7 @@ class ApplicationController < ActionController::Base
     case request.format
       when Mime::XML, Mime::JSON
         user = authenticate_with_http_token do |token, _|
-          decoded_user_id = @@crypt.decrypt_and_verify(token)
+          decoded_user_id = Rails.application.crypt.decrypt_and_verify(token)
           User.find(decoded_user_id)
         end
 
@@ -71,8 +54,6 @@ class ApplicationController < ActionController::Base
   end
 
   def ignore_newrelic
-    if (request.user_agent || '').include? 'NewRelicPinger'
-      NewRelic::Agent.ignore_transaction
-    end
+    NewRelic::Agent.ignore_transaction if request.user_agent and request.user_agent.include? 'NewRelicPinger'
   end
 end

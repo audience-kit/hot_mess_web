@@ -6,7 +6,7 @@ module Concerns::FacebookImportable
   included do
     @facebook_mapping = Hash.new
     field :facebook_id,          type: Integer
-    field :other_facebook_ids,   type: Array
+    field :facebook_ids,   type: Array
   end
   
   def assign_facebook_attributes(attributes)
@@ -49,7 +49,7 @@ module Concerns::FacebookImportable
   
       return by_id.first if by_id.any?
   
-      with_id = self.where(:other_facebook_ids.in => [ id ]).to_a
+      with_id = self.where(:facebook_ids.in => [ id ]).to_a
       
       return with_id.first if with_id.any?
       

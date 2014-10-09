@@ -8,7 +8,6 @@ require 'sprockets/railtie'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-
 module HotMess
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -24,5 +23,7 @@ module HotMess
     # config.i18n.default_locale = :deß
     
     config.console = Pry
+    
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

@@ -34,7 +34,7 @@ module Mock
       end
       
       def exchange_access_token_info(token)
-        token
+        { 'access_token' => APP_ACCESS_TOKEN, 'expires' => 100000 }
       end
     end
   end
