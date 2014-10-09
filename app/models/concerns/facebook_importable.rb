@@ -51,9 +51,7 @@ module Concerns::FacebookImportable
   
       with_id = self.where(:facebook_ids.in => [ id ]).to_a
       
-      return with_id.first if with_id.any?
-      
-      return nil
+      with_id.any? ? with_id.first : nil
     end
     
     def import_from_facebook(id, graph = nil)

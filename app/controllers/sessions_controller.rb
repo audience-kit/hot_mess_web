@@ -6,20 +6,20 @@ class SessionsController < ApplicationController
     logger.debug "\tFacebook login with status #{facebook_session_params[:status]}"
 
     if facebook_session_params[:status] == 'connected'
-      auth_response = facebook_signed_message(facebook_session_params[:authResponse][:signedRequest])
+      auth_response = Facebook.signed_message(facebook_session_params[:authResponse][:signedRequest])
       logger.debug "\tReceived Facebook signed authentication message #{auth_response.inspect}"
 
       user_id = facebook_session_params[:authResponse][:userID].to_i
       @person = Person.find_or_initialize_by(facebook_id: user_id)
       @user = @person.user
 
-      access_token_info = facebook_oauth.get_access_token_info(auth_response['code'])
+      access_token_info = Facebook.oauth.get_access_token_info(auth_response['code'])
       logger.debug "\tGot access token info from Facebook #{access_token_info.inspect}"
 
       session[:facebook_access_token] = access_token_info['access_token']
       session[:facebook_access_expires] = access_token_info['expires'].to_i
 
-      long_access_token = facebook_oauth.exchange_access_token_info(access_token_info['access_token'])
+      long_access_token = Facebook.oauth.exchange_access_token_info(access_token_info['access_token'])
 
       @user.facebook_access_token = long_access_token['access_token']
       @user.facebook_expires_in = long_access_token['expires'].to_i
