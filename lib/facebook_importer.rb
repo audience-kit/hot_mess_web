@@ -23,7 +23,7 @@ class FacebookImporter
 
   def import_venues(venue_ids = [], venue_other_ids = {})
     import_objects venue_ids do |venue_graph|
-      puts "Importing venue #{venue_graph['id']}"
+      puts "Importing venue #{venue_graph['name']}"
       
       venue = Venue.find_or_initialize_by(facebook_id: venue_graph['id'].to_i)
     
@@ -36,6 +36,9 @@ class FacebookImporter
       end
       
       venue.save
+      
+      venue.update_facebook_pictures(@graph)
+      
       venue
     end
   end
@@ -53,12 +56,14 @@ class FacebookImporter
 
   def import_people(people_ids = [])
     import_objects people_ids do |person_graph|
-      puts "Importing person #{person_graph['id']}"
-      person = Person.find_or_initialize_by(facebook_id: person_graph['id'.to_i])
+      puts "Importing person #{person_graph['name']}"
+      person = Person.find_or_initialize_by(facebook_id: person_graph['id'].to_i)
     
       person.assign_facebook_attributes person_graph
       person.is_public = true
       person.save
+      
+      person.update_facebook_pictures(@graph)
     
       person
     end

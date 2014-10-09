@@ -15,7 +15,18 @@ namespace :facebook do
   end
   
   desc 'Reloads pictures for Facebook objects'
-  task :pictures => :environment do 
-    Venue.each { |v| v.update_facebook_pictures }
+  task :pictures, [ :token ] => :environment do |task, args|
+    graph = args[:token] ? Koala::Facebook::API.new(args[:token]) : nil
+    
+    Venue.each { |v| v.update_facebook_pictures graph }
+    Person.each { |p| p.update_facebook_pictures graph }
+  end
+  
+  desc 'Makes the Facebook user Id an administrator'
+  task :admin, [ :id ] => :environment do |task, args|
+    person = Person.find_by_facebook_id args[:id]
+    
+    person.user.is_admin = true
+    person.user.save
   end
 end

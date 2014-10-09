@@ -6,4 +6,8 @@ module ApplicationHelper
       false
     end
   end
+  
+  def picture_for(model, size = :normal)
+    render partial: 'shared/picture', locals: { object: model, size: size }
+  end
 end

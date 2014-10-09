@@ -1,11 +1,15 @@
-%h1.page-header= @event.name
+.panel.panel-default
+  .panel-body
+    = picture_for @event, :large
+    %h1.page-header= @event.name
+  
 
 .row
   .col-md-8
     .panel.panel-primary
       .panel-heading Event Details
       .panel-body
-        = @event.description
+        = simple_format @event.description
 
   .col-md-4
     .panel.panel-default

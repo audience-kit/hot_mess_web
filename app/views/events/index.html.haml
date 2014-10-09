@@ -2,6 +2,7 @@
 
 %ul.list-group
   - @events.each do |event|
-    %li.list-group-item.event
+    %li.list-group-item.clearfix.event
+      = picture_for event
       %h4= link_to event.name, event
-      %p= event.description
+      %p= simple_format truncate(event.description, length: 160)

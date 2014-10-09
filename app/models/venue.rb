@@ -15,28 +15,17 @@ class Venue
   field :link,              type: String
   field :facebook_username, type: String
   
-  facebook_id
-  facebook_ids
+  facebook_id has_multiple: true
 
   belongs_to :imported_by,  class_name: 'User'
 
   embeds_one :location
   embeds_one :cover
-  embeds_many :pictures,    as: :photographic
 
   validates_presence_of :name
   
   facebook_map_attributes :id => :facebook_id, :username => :facebook_username
-  
-  def picture
-    pictures.where(type: :large).first
-  end
-
-  def facebook_url
-    return "http://facebook.com/#{self.facebook_username}" if self.facebook_username
-      
-    self.link
-  end
+  facebook_picture
   
   def import_facebook_events(koala_client)
     events = koala_client.get_object("#{facebook_id}/events")

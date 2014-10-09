@@ -1,9 +1,9 @@
-
-
-.row
-  .page-header
-    %h1= @venue.name
+.panel.panel-default
+  .panel-body
+    = picture_for @venue, :large
+    %h1.page-header= @venue.name
     %h3= @venue.about
+
 
 .row
   .col-md-8

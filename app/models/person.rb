@@ -16,15 +16,17 @@ class Person
   field :soundcloud_id,       type: Integer
   field :is_public,           type: Boolean,    default: false
   
-  facebook_id
-  
   belongs_to :user,           autobuild: true
+  
+  delegate :to_s, to: :name
   
   validates_presence_of :name
   
   scope :are_public, ->{ where(is_public: true) }
   
+  facebook_id
   facebook_map_attributes facebook_id: :id, facebook_verified: :verified, facebook_likes: :likes
+  facebook_picture
   
   def import_facebook_events
     graph = user.facebook_graph
@@ -50,7 +52,8 @@ class Person
           event_model.person = Person.find_or_initialize_by(facebook_id: event['owner']['id'].to_i)
         
           event_model.assign_facebook_attributes event
-          event_model.save
+          event_model.update_facebook_pictures graph
+          event_model.save!
         end
       end
     end

@@ -4,12 +4,7 @@
 %ul.list-group
   - @venues.each do |venue|
     %li.list-group-item.clearfix.venue
-      .pull-left( style="margin-right: 16px;" )
-        - if venue.picture
-          = image_tag venue.picture.url
-        - else
-          %div( style="width: 32px; height: 32px; background-color: #888;")
-
+      = picture_for venue
       %h4= link_to venue.name, venue
       - if venue.about
         %p= venue.about

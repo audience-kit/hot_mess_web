@@ -12,6 +12,7 @@ class Event
   field :minimum_age,         type: Integer
   
   facebook_id
+  facebook_picture
   
   belongs_to :venue
   belongs_to :person

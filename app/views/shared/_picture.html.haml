@@ -1,0 +1,5 @@
+.pull-left( style="margin-right: 16px;" )
+  - if object.picture
+    = image_tag object.picture(size).url
+  - else
+    %div( style="width: 32px; height: 32px; background-color: #888;")

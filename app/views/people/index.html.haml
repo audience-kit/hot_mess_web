@@ -4,9 +4,9 @@
   %ul.list-group
     - if @people.any?
       - @people.each do |person|
-        - unless person.name.nil?
-          %li.list-group-item
-            = person.name
+        %li.list-group-item.clearfix.person
+          = picture_for person
+          = link_to person, person
     - else
       %li.list-group-item-info
         %h4 There are no people in this list
