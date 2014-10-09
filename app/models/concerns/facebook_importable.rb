@@ -55,5 +55,19 @@ module Concerns::FacebookImportable
       
       return nil
     end
+    
+    def import_from_facebook(id, graph = nil)
+      graph ||= Facebook.application_graph
+    
+      graph_object = graph.get_object(id)
+      return unless graph_object
+    
+      id = graph_object['id'].to_i
+      venue = Venue.find_or_initialize_by(facebook_id: id)
+      venue.assign_facebook_attributes graph_object
+      venue.save
+    
+      venue
+    end
   end
 end
