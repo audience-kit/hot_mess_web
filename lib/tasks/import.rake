@@ -10,3 +10,4 @@ task :import, [ :token ] => [ :environment ] do |task, args|
     importer.import_locale(value)
   end
 end
+
