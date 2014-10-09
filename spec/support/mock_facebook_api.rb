@@ -27,6 +27,28 @@ module Mock
         
         return result['data'] || result
       end
+      
+      def batch(&block)
+        batch = Batch.new
+        
+        block.call(batch)
+        
+        batch.paths.collect{|p| get_object p}
+      end
+      
+      class Batch
+        def initialize
+          @paths = []
+        end
+        
+        def get_object(path)
+          @paths << path
+        end
+        
+        def paths
+          @paths
+        end
+      end
     end
     
     class OAuth
@@ -35,6 +57,10 @@ module Mock
       
       def exchange_access_token_info(token)
         { 'access_token' => APP_ACCESS_TOKEN, 'expires' => 100000 }
+      end
+      
+      def get_app_access_token
+        'app_access_token'
       end
     end
   end

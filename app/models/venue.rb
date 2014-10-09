@@ -36,5 +36,16 @@ class Venue
     events = koala_client.get_object("#{facebook_id}/events")
   end
   
-
+  def self.import_from_facebook(id)
+    graph = Facebook.application_graph.get_object(id)
+    
+    return unless graph
+    
+    id = graph['id'].to_i
+    venue = Venue.find_or_initialize_by(facebook_id: id)
+    venue.assign_facebook_attributes graph
+    venue.save
+    
+    venue
+  end
 end

@@ -1,0 +1,25 @@
+{
+  "description": "Halloween, Friday Night, SCARLET FREAKIN' HARLOT live at the DO.  Doesn't get much better than that!", 
+  "is_date_only": false, 
+  "location": "The Do Bar", 
+  "name": "Scarlet Harlots Halloween SCREAM", 
+  "owner": {
+    "category": "Musician/band", 
+    "name": "Scarlet Harlot", 
+    "id": "515383155206723"
+  }, 
+  "privacy": "OPEN", 
+  "start_time": "2014-10-31T21:30:00-0600", 
+  "timezone": "America/Denver", 
+  "updated_time": "2014-04-09T17:13:52+0000", 
+  "venue": {
+    "id": "464555756924170", 
+    "city": "Great Falls", 
+    "country": "United States", 
+    "latitude": 47.5235373869, 
+    "longitude": -111.308034735, 
+    "state": "MT", 
+    "zip": "59404"
+  }, 
+  "id": "1379876318960545"
+}

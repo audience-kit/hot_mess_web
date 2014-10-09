@@ -6,7 +6,7 @@ module Facebook
 
   def self.application_graph
     @facebook_app_access_token ||= oauth.get_app_access_token
-    logger.debug "\tFacebook App Access Token => #{@facebook_app_access_token}"
+    Rails.logger.debug "\tFacebook App Access Token => #{@facebook_app_access_token}"
     @facebook_graph = Koala::Facebook::API.new(@facebook_app_access_token)
   end
   
