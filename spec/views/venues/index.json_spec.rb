@@ -15,6 +15,7 @@ RSpec.describe "venues/index.json.jbuilder", type: :view do
     
     expect(result.count).to be 2
     expect(result[0]['url']).to_not be_nil
+    expect(result[0]['picture_url']).to_not be_nil
     expect(result[0]['name']).to eq @venues[0].name
   end
 end

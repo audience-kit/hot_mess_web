@@ -11,6 +11,10 @@ namespace :facebook do
     
     graph = Koala::Facebook::API.new(args[:token])
     
+    dir_path = File.dirname(path)
+    unless File.directory?(dir_path)
+      FileUtils.mkdir_p(dir_path)
+    end
     File.write(path, graph.to_json)
   end
   

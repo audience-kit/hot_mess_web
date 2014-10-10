@@ -8,6 +8,7 @@ class User
   field :middle_name,             type: String
   field :facebook_access_token,   type: String
   field :facebook_expires_in,     type: Integer
+  field :facebook_expires_at,     type: DateTime
   field :email,                   type: String
   field :is_admin,                type: Boolean,    default: false
 
@@ -17,6 +18,14 @@ class User
   validates_associated            :person
 
   delegate :to_s, to: :name
+  
+  def update_facebook_access_token
+    new_token = Facebook.oauth.exchange_access_token_info facebook_access_token
+    if new_token['access_token']
+      self.facebook_access_token = new_token['access_token']
+      self.facebook_expires_at = DateTime.getutc.advance seconds: new_token['expires'].to_i
+    end
+  end
   
   def update_from_facebook(me_graph = facebook_me_graph)
     self.assign_facebook_attributes me_graph
@@ -28,6 +37,8 @@ class User
 
   def facebook_graph
     @facebook_graph ||= Koala::Facebook::API.new(self.facebook_access_token) if self.facebook_access_token
+    
+    @facebook_graph || Facebook.application_graph
   end
   
   def self.find_by_facebook_token(token)

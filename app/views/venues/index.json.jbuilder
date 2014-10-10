@@ -3,7 +3,7 @@ json.array!(@venues) do |venue|
   
   json.extract! venue, :facebook_id, :name, :phone, :about, :description
 
-  if venue.picture
-    json.picture_url venue.picture.url
+  if venue.picture :large
+    json.picture_url venue.picture(:large).url
   end
 end

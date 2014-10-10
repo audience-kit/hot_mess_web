@@ -7,7 +7,7 @@ module Concerns::FacebookImportable
     @facebook_mapping = Hash.new
   end
   
-  def assign_facebook_attributes(attributes)
+  def assign_facebook_attributes(attributes = {})
     return if self.instance_variable_get FACEBOOK_ASSIGNING_ATTRIBUTES
     self.instance_variable_set FACEBOOK_ASSIGNING_ATTRIBUTES, true
     
@@ -44,18 +44,18 @@ module Concerns::FacebookImportable
     
     picture_graphs = picture_graphs.zip(Picture::PICTURE_TYPES)
     picture_graphs.each do |graph, type|
-      #unless graph.instance_of? Koala::Facebook::ClientError
+      if graph['data']
         picture = self.pictures.build
         picture.type = type
         picture.assign_facebook_attributes graph['data']
-        #end
+      end
     end
     
     self.save
   end
   
   def picture(size = :normal)
-    pictures.where(type: size).first
+    self.pictures.where(type: size.to_s).first
   end
 
   def facebook_url

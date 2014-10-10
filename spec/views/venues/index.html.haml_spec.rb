@@ -10,6 +10,7 @@ RSpec.describe "venues/index", :type => :view do
 
   it "renders a list of venues" do
     render
+    
     assert_select ".venue", count: 2
     assert_select '.venue img', count: 2
 
