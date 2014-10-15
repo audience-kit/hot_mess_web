@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
   def token
     params.require(:facebook_auth_token)
 
-    @user = User.find_by_facebook_token params[:facebook_access_token]
+    @user = User.find_by_facebook_token params[:facebook_auth_token]
     
     response_object = { auth_token: Rails.application.crypt.encrypt_and_sign(@user.to_param),
                         user_id: @user.to_param }
