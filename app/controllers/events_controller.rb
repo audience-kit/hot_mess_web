@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    midday = DateTime.new.at_midday
+    @events = Event.where(:start_time.gte => midday)
   end
 
   # GET /events/1
