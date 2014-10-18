@@ -1,5 +1,6 @@
 #!/bin/sh
 
+systemctl restart hot_mess.target
 # Set the environment for Rails to the 'production' environment for the following commands
 export RAILS_ENV=production
 
@@ -18,4 +19,4 @@ chmod -R g+w tmp
 chmod -R g+w log
 
 # And finally, restart the web hosting service
-systemctl restart hot_mess.target
+systemctl start hot_mess.target
