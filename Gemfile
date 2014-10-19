@@ -20,6 +20,7 @@ gem 'turbolinks'                  # Turbolinks makes following links in your web
 gem 'sqlite3'
 gem 'mongoid_rails_migrations'
 gem 'pry'
+gem 'yelp'
 
 group :development, :assets do
   gem 'sass'
