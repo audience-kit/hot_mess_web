@@ -6,12 +6,17 @@
     %thead
       %tr
         %th Name
+        %th.col-md-1 Public
+        %th.col-md-2 Actions
     %tbody
       - @people.each do |person|
         %tr
           %td= link_to person.name, [:admin, person]
+          %td= person.is_public
+          %td
+            = link_to 'Edit', edit_admin_person_path(person), class: 'btn btn-warning'
+            = link_to 'Delete', [:admin, person], method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
   .panel-footer
-    - if is_admin?
-      = link_to 'New Person', new_admin_person_path, class: 'btn btn-primary'
+    = link_to 'New Person', new_admin_person_path, class: 'btn btn-primary'
     
 
