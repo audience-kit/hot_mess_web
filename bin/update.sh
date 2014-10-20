@@ -15,6 +15,8 @@ bundle install > log/bundle.log
 # Precompile production assets
 bundle exec rake assets:precompile
 
+bundle exec foreman export systemd /etc/systemd/system
+
 # This sets all the files to the 'http' group, they will by default have read-access
 chgrp -hR http .
 chmod -R g+w tmp
