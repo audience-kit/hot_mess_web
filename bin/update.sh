@@ -18,4 +18,4 @@ chmod -R g+w tmp
 chmod -R g+w log
 
 # And finally, restart the web hosting service
-systemctl restart hot_mess.target
+pumactl --pidfile tmp/pids/puma.pid restart
