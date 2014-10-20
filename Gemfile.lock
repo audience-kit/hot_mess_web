@@ -55,6 +55,7 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colorize (0.7.3)
+    commonjs (0.2.7)
     compass (0.12.7)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -126,6 +127,11 @@ GEM
       addressable
       faraday
       multi_json
+    less (2.5.1)
+      commonjs (~> 0.2.7)
+    less-rails (2.5.0)
+      actionpack (>= 3.1)
+      less (~> 2.5.0)
     libv8 (3.16.14.7)
     listen (2.7.11)
       celluloid (>= 0.15.2)
@@ -311,6 +317,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   koala
+  less-rails
   mongoid-rails
   mongoid_rails_migrations
   newrelic_rpm

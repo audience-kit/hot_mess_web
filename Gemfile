@@ -22,6 +22,7 @@ gem 'mongoid_rails_migrations'
 gem 'pry'
 gem 'yelp'
 gem 'ice_cube'
+gem 'less-rails'
 
 group :development, :assets do
   gem 'sass'

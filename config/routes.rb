@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     post :token, constraints: { format: "json" }
   end
 
-  get 'facebook_config.js'  =>  'home#facebook_config', format: 'js'
   get 'dashboard'           =>  'home#dashboard'
   get 'me'                  =>  'people#show'
   get 'privacy'             =>  'home#privacy'
