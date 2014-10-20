@@ -2,6 +2,7 @@ class Venue
   include Mongoid::Document
   include Mongoid::Timestamps
   include Concerns::FacebookImportable
+  include Concerns::FacebookPhoto
 
   field :name,              type: String
   field :about,             type: String
@@ -25,7 +26,6 @@ class Venue
   validates_presence_of :name
   
   facebook_map_attributes :id => :facebook_id, :username => :facebook_username
-  facebook_picture
   
   def import_facebook_events(koala_client)
     events = koala_client.get_object("#{facebook_id}/events")
