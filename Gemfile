@@ -21,6 +21,7 @@ gem 'sqlite3'
 gem 'mongoid_rails_migrations'
 gem 'pry'
 gem 'yelp'
+gem 'ice_cube'
 
 group :development, :assets do
   gem 'sass'
