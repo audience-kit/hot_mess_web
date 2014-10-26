@@ -11,6 +11,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "chef/fedora-20"
+  
+  config.omnibus.chef_version = :latest
+  
+  config.berkshelf.enabled = true
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -87,11 +91,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # some recipes and/or roles.
   #
   config.vm.provision "chef_solo" do |chef|
+    chef.custom_config_path = "chef.rb"
     chef.roles_path = "roles"
-    chef.add_role "app"
-    chef.add_role "db"
-    chef.add_role "web"
-    chef.add_role "worker"
+    chef.add_role "all"
   
     # You may also specify custom JSON attributes:
     chef.json = { }
