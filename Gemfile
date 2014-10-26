@@ -39,7 +39,6 @@ group :development, :test do
   gem "spring-commands-rspec"
   gem 'rspec-rails'               # Use RSpec for testing
   gem 'factory_girl_rails'
-  gem 'capistrano-rails'          # Use Capistrano for deployment
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-rails'
