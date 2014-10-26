@@ -15,5 +15,5 @@ class User
   validates_presence_of           :person
   validates_associated            :person
 
-  delegate :to_s, to: :name
+  delegate :to_s,                 to: :name
 end

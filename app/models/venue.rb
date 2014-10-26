@@ -18,6 +18,7 @@ class Venue
   
   facebook_id has_multiple: true
 
+  has_many :events
   belongs_to :imported_by,  class_name: 'User'
 
   embeds_one :location

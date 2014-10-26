@@ -24,7 +24,7 @@ gem 'yelp'
 gem 'ice_cube'
 gem 'less-rails'
 
-group :development, :assets do
+group :development, :assets, :test do
   gem 'sass'
   gem 'coffee-script'
   gem 'therubyracer'              # Use SCSS for stylesheets
