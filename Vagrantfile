@@ -14,41 +14,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.omnibus.chef_version = :latest
   
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = [ "cookbooks", "site-cookbooks" ]
     chef.roles_path = 'roles'
     
     chef.add_recipe :yum
+    chef.add_recipe 'rvm::vagrant'
+    
     chef.add_role 'db'
     chef.add_role 'web'
-    chef.add_recipe 'rvm::vagrant'
-    chef.add_recipe 'rvm::system'
+    chef.add_role 'app'
+    chef.add_role 'worker'
 
 
     chef.json = {
-      :redis   => {
-        :bind        => "127.0.0.1",
-        :port        => "6379",
-        :config_path => "/etc/redis/redis.conf",
-        :daemonize   => "yes",
-        :timeout     => "300",
-        :loglevel    => "notice"
-      },
-      :mongodb => {
-        :dbpath  => "/var/lib/mongodb",
-        :logpath => "/var/log/mongodb",
-        :port    => "27017"
-      },
-      :git     => {
-        :prefix => "/usr/local"
-      },
       :rvm => {
         :vagrant => {
           :system_chef_solo   => '/usr/bin/chef-solo',
           :system_chef_client => '/usr/bin/chef-client'
         },
-        :default_ruby => 'system',
-        :rubies => [ 'ruby-2.1' ]
+        :default_ruby => 'system'
       }
     }
   end
