@@ -8,7 +8,7 @@
 #   [200, { 'Content-Type' => 'text/plain', 'Content-Length' => body.length.to_s }, [body]]
 # end
 
-environment = ENV['RAILS_ENV'] || 'development'
+environment ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development'
 daemonize false
 
 pidfile 'tmp/pids/puma.pid'
