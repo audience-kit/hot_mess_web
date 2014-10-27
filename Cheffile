@@ -1,11 +1,10 @@
 site "http://community.opscode.com/api/v1"
 
-cookbook 'apt'
+cookbook 'sudo'
+# cookbook 'rbenv'
+cookbook 'rvm'
 cookbook 'build-essential'
-cookbook 'mysql'
-cookbook 'vim'
 cookbook 'mongodb'
 cookbook "redis"
-cookbook "rvm"
 cookbook "nginx"
 cookbook "git"

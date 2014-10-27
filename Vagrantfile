@@ -10,21 +10,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "chef/fedora-20"
   
-  config.vm.provider :virtualbox
-
+  config.omnibus.chef_version = :latest
+  
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
-
-    chef.add_recipe "apt"
-    chef.add_recipe "vim"
-    chef.add_recipe "mongodb"
-    chef.add_recipe 'redis'
+    chef.cookbooks_path = [ "cookbooks", "site-cookbooks" ]
+    chef.roles_path = 'roles'
+    
+    chef.add_recipe :yum
+    chef.add_role 'db'
+    chef.add_role 'web'
     chef.add_recipe 'rvm::vagrant'
     chef.add_recipe 'rvm::system'
-    chef.add_recipe 'nginx'
-    chef.add_recipe 'git'
+
 
     chef.json = {
       :redis   => {
@@ -40,17 +39,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :logpath => "/var/log/mongodb",
         :port    => "27017"
       },
-      :nginx   => {
-        :dir                => "/etc/nginx",
-        :log_dir            => "/var/log/nginx",
-        :binary             => "/usr/sbin/nginx",
-        :user               => "www-data",
-        :init_style         => "runit",
-        :pid                => "/var/run/nginx.pid",
-        :worker_connections => "1024"
-      },
       :git     => {
         :prefix => "/usr/local"
+      },
+      :rvm => {
+        :vagrant => {
+          :system_chef_solo   => '/usr/bin/chef-solo',
+          :system_chef_client => '/usr/bin/chef-client'
+        },
+        :default_ruby => 'system',
+        :rubies => [ 'ruby-2.1' ]
       }
     }
   end
