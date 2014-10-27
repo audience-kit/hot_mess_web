@@ -23,11 +23,11 @@ gem 'pry'
 gem 'yelp'
 gem 'ice_cube'
 gem 'less-rails'
+gem 'execjs'
 
 group :development, :assets, :test do
   gem 'sass'
   gem 'coffee-script'
-  gem 'therubyracer'              # Use SCSS for stylesheets
   gem 'sass-rails'                # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier'                  # Use CoffeeScript for .js.coffee assets and views
   gem 'coffee-rails'
