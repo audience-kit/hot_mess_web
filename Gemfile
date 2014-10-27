@@ -48,3 +48,7 @@ group :development, :test do
   gem 'guard-spring'
   # gem 'debugger'                  # Use debugger
 end
+
+platform 'x86_64-linux' do
+  gem 'therubyracer'
+end
