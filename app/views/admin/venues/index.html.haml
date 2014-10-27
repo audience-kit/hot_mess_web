@@ -1,24 +1,26 @@
 .row
   %h1.page-header Listing Seattle Venues
 
-- @venues.each do |venue|
-  .row
-    .col-md-12
-      .pull-left( style="margin-right: 16px" )
-        %img{ src: venue.picture.url }
+.panel.panel-default
+  .panel-heading Venues
+  %ul.panel-body.list-group
+    - @venues.each do |venue|
+      %li.list-group-item.clearfix
+        .col-md-12
+          .pull-left( style="margin-right: 16px" )
+            %img{ src: venue.picture.url }
 
-      .pull-left
-        %p= link_to venue.name, [venue]
-        - if venue.about
-          %p= truncate venue.about, length: 140
-        - else
-          %p.text-muted No Description
+          .pull-left
+            %p= link_to venue.name, [venue]
+            - if venue.about
+              %p= truncate venue.about, length: 140
+            - else
+              %p.text-muted No Description
 
-      - if is_admin?
-        .pull-right
-          = link_to 'Edit', [:admin, venue], class: 'btn btn-warning'
+          - if is_admin?
+            .pull-right
+              = link_to 'Edit', [:admin, venue], class: 'btn btn-warning'
+              = link_to 'Delete', [:admin, venue], method: :delete, data: { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
 
-
-
-- if is_admin?
-  = link_to 'New Venue', new_admin_venue_path, class: 'btn btn-primary'
+  .panel-footer
+    = link_to 'New Venue', new_admin_venue_path, class: 'btn btn-primary'

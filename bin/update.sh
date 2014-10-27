@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Begin by stopping the application
+systemctl stop hot_mess.target
+
 # Set the environment for Rails to the 'production' environment for the following commands
 export RAILS_ENV=production
 
@@ -12,10 +15,12 @@ bundle install > log/bundle.log
 # Precompile production assets
 bundle exec rake assets:precompile
 
+bundle exec foreman export systemd /etc/systemd/system
+
 # This sets all the files to the 'http' group, they will by default have read-access
 chgrp -hR http .
 chmod -R g+w tmp
 chmod -R g+w log
 
-# And finally, restart the web hosting service
-pumactl --pidfile tmp/pids/puma.pid restart
+# And finally, restart the application
+systemctl start hot_mess.target

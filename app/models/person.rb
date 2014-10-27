@@ -2,6 +2,7 @@ class Person
   include Mongoid::Document
   include Mongoid::Timestamps
   include Concerns::FacebookImportable
+  include Concerns::FacebookPhoto
   
   GENDER_MALE                 = 'male'
   GENDER_FEMALE               = 'female'
@@ -26,7 +27,6 @@ class Person
   
   facebook_id
   facebook_map_attributes facebook_id: :id, facebook_verified: :verified, facebook_likes: :likes
-  facebook_picture
   
   def import_facebook_events
     graph = user.facebook_graph

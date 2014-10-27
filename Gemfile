@@ -20,8 +20,11 @@ gem 'turbolinks'                  # Turbolinks makes following links in your web
 gem 'sqlite3'
 gem 'mongoid_rails_migrations'
 gem 'pry'
+gem 'yelp'
+gem 'ice_cube'
+gem 'less-rails'
 
-group :development, :assets do
+group :development, :assets, :test do
   gem 'sass'
   gem 'coffee-script'
   gem 'therubyracer'              # Use SCSS for stylesheets

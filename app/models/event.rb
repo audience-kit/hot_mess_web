@@ -2,6 +2,7 @@ class Event
   include Mongoid::Document
   include Mongoid::Timestamps
   include Concerns::FacebookImportable
+  include Concerns::FacebookPhoto
 
   field :name,                type: String
   field :description,         type: String
@@ -12,7 +13,6 @@ class Event
   field :minimum_age,         type: Integer
   
   facebook_id
-  facebook_picture
   
   belongs_to :venue
   belongs_to :person

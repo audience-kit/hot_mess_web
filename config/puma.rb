@@ -8,13 +8,13 @@
 #   [200, { 'Content-Type' => 'text/plain', 'Content-Length' => body.length.to_s }, [body]]
 # end
 
-environment 'production'
+environment = ENV['RAILS_ENV'] || 'development'
 daemonize false
 
 pidfile 'tmp/pids/puma.pid'
 state_path 'tmp/pids/puma.state'
 
-# stdout_redirect 'log/puma.log', 'log/puma_err.log'
+stdout_redirect 'log/puma.log', 'log/puma_err.log'
 
 # quiet
 threads 0, 16
@@ -28,6 +28,7 @@ bind 'unix://tmp/sockets/puma.sock'
 
 # restart_command '/u/app/lolcat/bin/restart_puma'
 
+tag 'Hot Mess'
 
 # === Cluster mode ===
 

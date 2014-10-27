@@ -7,19 +7,22 @@ FacebookAuthentication =
 
   login: ->
     FB.getLoginStatus (response) ->
-      if (response.status == 'connected')
-        $.ajax('/session', {
-          type: 'POST',
-          beforeSend: (xhr) ->
-            xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'),
-          complete: FacebookAuthentication._session_create_callback,
-          data: response
-        })
-      else
-        FB.login this.login, {
-          scope: "email,public_profile,user_friends,user_events",
-          return_scopes: true
-        }
+      FacebookAuthentication.facebook_login_callback response
+
+  facebook_login_callback: (response) ->
+    if (response.status == 'connected')
+      $.ajax('/session', {
+        type: 'POST',
+        beforeSend: (xhr) ->
+          xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'),
+        complete: FacebookAuthentication._session_create_callback,
+        data: response
+      })
+    else
+      FB.login FacebookAuthentication.facebook_login_callback, {
+        scope: "email,public_profile,user_friends,user_events",
+        return_scopes: true
+      }
 
   logout: ->
     $.ajax('/session', {
