@@ -10,12 +10,51 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "chef/fedora-20"
+  config.vm.box = "ubuntu/trusty64"
   
-  config.omnibus.chef_version = :latest
-  
-  config.berkshelf.enabled = true
+  config.vm.provider :virtualbox
 
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
+
+    chef.add_recipe "apt"
+    chef.add_recipe "vim"
+    chef.add_recipe "mongodb"
+    chef.add_recipe 'redis'
+    chef.add_recipe 'rvm::vagrant'
+    chef.add_recipe 'rvm::system'
+    chef.add_recipe 'nginx'
+    chef.add_recipe 'git'
+
+    chef.json = {
+      :redis   => {
+        :bind        => "127.0.0.1",
+        :port        => "6379",
+        :config_path => "/etc/redis/redis.conf",
+        :daemonize   => "yes",
+        :timeout     => "300",
+        :loglevel    => "notice"
+      },
+      :mongodb => {
+        :dbpath  => "/var/lib/mongodb",
+        :logpath => "/var/log/mongodb",
+        :port    => "27017"
+      },
+      :nginx   => {
+        :dir                => "/etc/nginx",
+        :log_dir            => "/var/log/nginx",
+        :binary             => "/usr/sbin/nginx",
+        :user               => "www-data",
+        :init_style         => "runit",
+        :pid                => "/var/run/nginx.pid",
+        :worker_connections => "1024"
+      },
+      :git     => {
+        :prefix => "/usr/local"
+      }
+    }
+  end
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -90,14 +129,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
-  config.vm.provision "chef_solo" do |chef|
-    chef.custom_config_path = "chef.rb"
-    chef.roles_path = "roles"
-    chef.add_role "all"
-  
-    # You may also specify custom JSON attributes:
-    chef.json = { }
-  end
+  # config.vm.provision "chef_solo" do |chef|
+  #   chef.cookbooks_path = "../my-recipes/cookbooks"
+  #   chef.roles_path = "../my-recipes/roles"
+  #   chef.data_bags_path = "../my-recipes/data_bags"
+  #   chef.add_recipe "mysql"
+  #   chef.add_role "web"
+  #
+  #   # You may also specify custom JSON attributes:
+  #   chef.json = { mysql_password: "foo" }
+  # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
