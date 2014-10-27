@@ -7,6 +7,6 @@ user 'hot_mess' do
   action :create
 end
 
-service 'hot_mess-web' do
+service 'hot_mess.target' do
   action [ :enable, :start ]
 end

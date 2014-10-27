@@ -36,3 +36,4 @@ rvm_shell 'foreman export' do
   cwd '/vagrant'
   code 'bundle exec foreman export systemd /etc/systemd/system --app hot_mess --user hot_mess'
 end
+
