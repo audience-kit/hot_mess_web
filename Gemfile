@@ -23,7 +23,7 @@ gem 'pry'
 gem 'yelp'
 gem 'ice_cube'
 gem 'less-rails'
-gem 'execjs'
+
 
 group :development, :assets, :test do
   gem 'sass'
@@ -31,6 +31,8 @@ group :development, :assets, :test do
   gem 'sass-rails'                # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier'                  # Use CoffeeScript for .js.coffee assets and views
   gem 'coffee-rails'
+  gem 'execjs'
+  gem 'therubyracer'
 end
 
 group :doc do
@@ -47,8 +49,4 @@ group :development, :test do
   gem 'guard-rails'
   gem 'guard-spring'
   # gem 'debugger'                  # Use debugger
-end
-
-platform 'x86_64-linux' do
-  gem 'therubyracer'
 end
