@@ -3,13 +3,13 @@ require 'rails_helper'
 describe Concerns::FacebookImportable do
   before :all do
     ConcernsFacebookImportableOwner = Class.new
-    ConcernsFacebookImportableOwner.include Mongoid::Document
-    ConcernsFacebookImportableOwner.include Concerns::FacebookImportable
+    ConcernsFacebookImportableOwner.send :include, Mongoid::Document
+    ConcernsFacebookImportableOwner.send :include, Concerns::FacebookImportable
     ConcernsFacebookImportableOwner.has_one :owned, class_name: 'ConcernsFacebookImportableOwned'
     
     ConcernsFacebookImportableOwned = Class.new
-    ConcernsFacebookImportableOwned.include Mongoid::Document
-    ConcernsFacebookImportableOwned.include Concerns::FacebookImportable
+    ConcernsFacebookImportableOwned.send :include, Mongoid::Document
+    ConcernsFacebookImportableOwned.send :include, Concerns::FacebookImportable
     ConcernsFacebookImportableOwned.belongs_to :owner, class_name: 'ConcernsFacebookImportableOwner'
     ConcernsFacebookImportableOwned.field :facebook_name, type: String
     ConcernsFacebookImportableOwned.facebook_map_attribute :name, :facebook_name
@@ -17,8 +17,8 @@ describe Concerns::FacebookImportable do
   
   before :each do
     @example_class = Class.new
-    @example_class.include Mongoid::Document
-    @example_class.include Concerns::FacebookImportable
+    @example_class.send :include, Mongoid::Document
+    @example_class.send :include, Concerns::FacebookImportable
     
     @example_class.field :facebook_id, type: Integer
     
