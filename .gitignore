@@ -14,10 +14,7 @@
 /tmp
 /public/assets
 /.idea
-*~
 /.env
 /.vagrant
-*.sublime-project
-*.sublime-workspace
-/cookbooks/
-.DS_Store
+/cookbooks
+/doc/app

@@ -17,7 +17,8 @@ class FacebookImporter
     Venue.all.each {|v| v.import_facebook_events(@graph) }
     
     if @user
-      @user.person.import_facebook_events
+      event_importer = Facebook::EventImporter.new(@user.person)
+      event_importer.import_facebook_events(@graph)
     end
   end
 
@@ -63,6 +64,8 @@ class FacebookImporter
       person.is_public = true
       person.save
       
+      event_importer = Facebook::EventImporter.new(person)
+      event_importer.import_facebook_events(@graph)
       person.update_facebook_pictures(@graph)
     
       person

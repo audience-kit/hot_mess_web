@@ -16,4 +16,4 @@
       .panel-heading Venue
       .panel-body
         - if @event.venue
-          = @event.venue.name
+          = link_to @event.venue, @event.venue.name
