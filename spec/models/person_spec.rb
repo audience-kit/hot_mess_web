@@ -12,6 +12,6 @@ RSpec.describe Person, type: :model do
     user = create :user
     venue = Venue.import_from_facebook('neighboursseattle')
     
-    expect{ user.person.import_facebook_events }.to change{ Event.all.count }.from(0).to(1)
+    expect{ venue.import_facebook_events(user.facebook_graph) }.to change{ Event.all.count }.from(0).to(1)
   end
 end

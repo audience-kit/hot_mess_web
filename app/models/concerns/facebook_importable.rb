@@ -76,11 +76,11 @@ module Concerns::FacebookImportable
       return unless graph_object
     
       id = graph_object['id'].to_i
-      venue = Venue.find_or_initialize_by(facebook_id: id)
-      venue.assign_facebook_attributes graph_object
-      venue.save
+      item = self.find_or_initialize_by(facebook_id: id)
+      item.assign_facebook_attributes graph_object
+      item.save
     
-      venue
+      item
     end
   end
 end

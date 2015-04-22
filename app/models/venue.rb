@@ -30,5 +30,10 @@ class Venue
   
   def import_facebook_events(koala_client)
     events = koala_client.get_object("#{facebook_id}/events")
+
+    events.each do |event|
+      imported_event = Event.import_from_facebook(event['id'], koala_client)
+      self.events << imported_event
+    end
   end
 end

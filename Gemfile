@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '>= 4.1.5'             # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails'                       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'jquery-rails'                # Use jquery as the JavaScript library
 gem 'jbuilder', '~> 2.0'          # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'bcrypt', '~> 3.1.7'          # Use ActiveModel has_secure_password
@@ -41,12 +41,12 @@ end
 
 group :development, :test do
   gem 'spring'                    # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring-commands-rspec"
+  gem 'spring-commands-rspec'
   gem 'rspec-rails'               # Use RSpec for testing
   gem 'factory_girl_rails'
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-rails'
-  gem 'guard-spring'
+  # gem 'guard'
+  # gem 'guard-rspec'
+  # gem 'guard-rails'
+  # gem 'guard-spring'
   # gem 'debugger'                  # Use debugger
 end

@@ -11,6 +11,7 @@ class Event
   field :updated_time,        type: DateTime
   field :owner_id,            type: Integer
   field :minimum_age,         type: Integer
+  field :venue_id,            type: BSON::ObjectId
   
   facebook_id
   
