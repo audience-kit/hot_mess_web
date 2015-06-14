@@ -15,7 +15,9 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'hotmess.town', user: 'root', roles: %w{web app db}
+server 'www.hotmesslife.com', user: 'root', roles: %w{web app db}
+
+set :branch, :master
 
 
 # Custom SSH Options
