@@ -17,7 +17,6 @@ gem 'koala'
 gem 'database_cleaner'
 gem 'soundcloud'
 gem 'turbolinks'                  # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'sqlite3'
 gem 'mongoid_rails_migrations'
 gem 'pry'
 gem 'yelp'
@@ -49,4 +48,9 @@ group :development, :test do
   # gem 'guard-rails'
   # gem 'guard-spring'
   # gem 'debugger'                  # Use debugger
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-puma'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
 end
