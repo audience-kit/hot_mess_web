@@ -320,3 +320,6 @@ DEPENDENCIES
   turbolinks
   uglifier
   yelp
+
+BUNDLED WITH
+   1.10.3
