@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+
+
   namespace :admin do
     resources :locales
 
@@ -16,18 +17,25 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :events
-  resources :people
-  resources :venues
+  with_options only: [ :show, :index ] do
+    resources :events
+    resources :people
+    resources :venues
+  end
   
-  resource :session do
+  resource :session, only: [ :new, :create, :destroy ] do
     post :token, constraints: { format: "json" }
   end
 
-  get 'dashboard'           =>  'home#dashboard'
-  get 'me'                  =>  'people#show'
-  get 'privacy'             =>  'home#privacy'
-  root                          'home#index'
+  resources :locale, only: [ :show ]
+
+  get :me, controller: :people, action: :show
+
+  with_options controller: :home do
+    get :dashboard, action: :dashboard
+    get :privacy, action: :privacy
+    root action: :index
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
