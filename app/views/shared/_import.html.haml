@@ -8,6 +8,6 @@
           = form.text_field :page, class: 'form-control', placeholder: 'page' 
     .panel-footer.clearfix
       .pull-left
-        = link_to 'Cancel', url_for(action: :index, only_path: true, controller: controller), class: 'btn btn-danger'
+        = link_to 'Cancel', url_for(action: 'index', only_path: true, controller: controller), class: 'btn btn-danger'
       .pull-right
         = form.submit 'Import', class: 'btn btn-success'
