@@ -71,7 +71,5 @@ test:
 production:
   sessions:
     default:
-      database: hot_mess
-      hosts:
-        - localhost:27017
+      uri: <%= ENV['MONGOLAB_URI'] %>
       options:
