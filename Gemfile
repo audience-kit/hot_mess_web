@@ -1,3 +1,5 @@
+ruby '2.2.2'
+
 source 'https://rubygems.org'
 
 gem 'rails'                       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -22,6 +24,7 @@ gem 'pry'
 gem 'yelp'
 gem 'ice_cube'
 gem 'less-rails'
+gem 'rails_12factor'
 
 
 group :development, :assets, :test do
