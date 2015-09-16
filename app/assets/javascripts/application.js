@@ -10,9 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require requirejs/require
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require facebook/config
-//= require ie10-viewport-bug-workaround
+//= require bootstrap/dist/js/bootstrap
 //= require_tree .

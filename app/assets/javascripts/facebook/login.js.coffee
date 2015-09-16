@@ -45,10 +45,21 @@ FacebookAuthentication =
   on_session_delete: (callback) ->
     FacebookAuthentication._on_session_delete += callback
 
+  setup: ->
+    $(document).ready () ->
+      window.fbAsyncInit = ->
+        FB.init {
+          appId      : $("meta[name='fb-app']").get 'value',
+          xfbml      : false,
+          version    : 'v2.4'
+        }
 
-$(document).ready () ->
-  $('.facebook_login').click () ->
-    FacebookAuthentication.login()
+      $('.facebook_login').click () ->
+        FacebookAuthentication.login()
 
-  $('.facebook_logout').click () ->
-    FacebookAuthentication.logout()
+      $('.facebook_logout').click () ->
+        FacebookAuthentication.logout()
+
+FacebookAuthentication.setup
+
+require "//connect.facebook.net/en_US/sdk.js"
