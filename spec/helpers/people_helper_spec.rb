@@ -10,6 +10,6 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe PersonHelper, :type => :helper do
+RSpec.describe PeopleHelper, :type => :helper do
 
 end

@@ -21,6 +21,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
   gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'factory_girl_rails'
 end
 
 group :doc do

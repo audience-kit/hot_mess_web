@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     post :token, constraints: { format: "json" }
   end
 
-  resources :locale, only: [ :show ]
+  resources :locales, only: [ :show ]
 
   get :me, controller: :people, action: :show
 

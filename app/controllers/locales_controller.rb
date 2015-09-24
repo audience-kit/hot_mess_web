@@ -1,4 +1,4 @@
-class LocalesControllerController < ApplicationController
+class LocalesController < ApplicationController
   def show
     session[:locale] = params[:id]
 

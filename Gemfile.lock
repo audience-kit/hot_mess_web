@@ -70,6 +70,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
@@ -112,7 +117,7 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (2.6.2)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.1)
     mongoid (4.0.2)
       activemodel (~> 4.0)
       moped (~> 2.0.0)
@@ -193,6 +198,8 @@ GEM
     sexp_processor (4.6.0)
     simple_oauth (0.3.1)
     spring (1.4.0)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (3.3.4)
       rack (~> 1.0)
     sprockets-rails (2.3.3)
@@ -224,6 +231,7 @@ DEPENDENCIES
   bcrypt
   coffee-rails
   cucumber-rails
+  factory_girl_rails
   geocoder
   haml-rails
   jbuilder
@@ -235,6 +243,7 @@ DEPENDENCIES
   sass-rails
   sdoc
   spring
+  spring-commands-rspec
   turbolinks
   unicorn
   yelp

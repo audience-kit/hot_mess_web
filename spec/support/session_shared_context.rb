@@ -9,7 +9,7 @@ shared_context 'session' do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-        name: "Seattle"
+        name: 'Seattle'
     }
   }
 
