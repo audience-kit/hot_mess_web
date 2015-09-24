@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout 'main', except: :dashboard
+  layout 'cover', except: :dashboard
   skip_before_action :set_user, except: :dashboard
 
   # GET /homes

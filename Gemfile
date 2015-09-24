@@ -4,56 +4,29 @@ source 'https://rubygems.org'
 
 gem 'rails'                       # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'jquery-rails'                # Use jquery as the JavaScript library
-gem 'jbuilder', '~> 2.0'          # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'bcrypt', '~> 3.1.7'          # Use ActiveModel has_secure_password
+gem 'sass-rails'                  # Use sass for stylesheets
 gem 'haml-rails'                  # Use HAML as the rendering engine
 gem 'mongoid-rails'               # MongoDB mapper for data persistence layer
-gem 'puma'                        # Use the puma application server for production
-gem 'resque'
-gem 'timezone'
-gem 'compass'
-gem 'chronic'
-gem 'foreman'                     # Use Foreman for process startup
-gem 'newrelic_rpm'
+gem 'coffee-rails'
+
+gem 'turbolinks'
+gem 'jbuilder'                    # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'bcrypt'                      # Use ActiveModel has_secure_password
+
+gem 'unicorn'                     # Use the unicorn application server for production
+
 gem 'koala'
-gem 'database_cleaner'
-gem 'soundcloud'
-gem 'turbolinks'                  # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'mongoid_rails_migrations'
-gem 'pry'
 gem 'yelp'
-gem 'ice_cube'
-gem 'less-rails'
-gem 'rails_12factor'
+gem 'geocoder'
 
-
-group :development, :assets, :test do
-  gem 'sass'
-  gem 'coffee-script'
-  gem 'sass-rails'                # Use Uglifier as compressor for JavaScript assets
-  gem 'uglifier'                  # Use CoffeeScript for .js.coffee assets and views
-  gem 'coffee-rails'
-  gem 'execjs'
-  gem 'therubyracer'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'cucumber-rails', require: false
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'factory_girl_rails'
 end
 
 group :doc do
   gem 'sdoc'                      # bundle exec rake doc:rails generates the API under doc/api.
-end
-
-group :development, :test do
-  gem 'spring'                    # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring-commands-rspec'
-  gem 'rspec-rails'               # Use RSpec for testing
-  gem 'factory_girl_rails'
-  # gem 'guard'
-  # gem 'guard-rspec'
-  # gem 'guard-rails'
-  # gem 'guard-spring'
-  # gem 'debugger'                  # Use debugger
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
 end

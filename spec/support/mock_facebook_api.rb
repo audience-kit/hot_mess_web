@@ -1,7 +1,7 @@
 
 module Mock
   module Facebook
-    APP_ACCESS_TOKEN = "app_access_token_for_mocks"
+    APP_ACCESS_TOKEN = 'app_access_token_for_mocks'
 
     def self.mock_facebook_api(state)
       # oauth_class_double = class_double("Koala::Facebook::OAuth")
@@ -11,8 +11,8 @@ module Mock
       # expect(oauth_class_double).to receive(:new).and_return(oauth_double)
       # expect(oauth_double).to receive(:get_app_access_token).and_return(Mock::Facebook::APP_ACCESS_TOKEN)
       # expect(graph_double).to receive(:new).with(Mock::Facebook::APP_ACCESS_TOKEN).and_return(Mock::Facebook::API.new)
-      state.stub_const("Koala::Facebook::API", Mock::Facebook::API)
-      state.stub_const("Koala::Facebook::OAuth", Mock::Facebook::OAuth)
+      state.stub_const('Koala::Facebook::API', Mock::Facebook::API)
+      state.stub_const('Koala::Facebook::OAuth', Mock::Facebook::OAuth)
     end
 
     class API
@@ -21,9 +21,10 @@ module Mock
       end
 
       def get_object(path)
-        resposne_path = File.join(RSpec.configuration.fixture_path, "#{path}.json")
+        puts RSpec.configuration.fixture_path
+        response_path = File.join(Rails.root, 'spec', 'fixtures', "#{path}.json")
 
-        result = JSON.parse(File.read(resposne_path))
+        result = JSON.parse(File.read(response_path))
         
         return result['data'] || result
       end

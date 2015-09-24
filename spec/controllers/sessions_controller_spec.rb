@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, :type => :controller do
-  context "mobile login" do
+  context 'mobile login' do
     it 'should return an authorization token for a valid facebook token' do
       Mock::Facebook.mock_facebook_api(self)
       
