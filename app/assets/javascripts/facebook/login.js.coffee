@@ -47,12 +47,13 @@ FacebookAuthentication =
 
   setup: ->
     $(document).ready () ->
+
       window.fbAsyncInit = ->
-        FB.init {
-          appId      : $("meta[name='fb-app']").get 'value',
-          xfbml      : false,
-          version    : 'v2.4'
-        }
+        FB.init({
+          appId      : $("meta[name='fb-app']").attr('value'),
+          xfbml      : true,
+          version    : 'v2.5'
+        })
 
       $('.facebook_login').click () ->
         FacebookAuthentication.login()
@@ -60,6 +61,4 @@ FacebookAuthentication =
       $('.facebook_logout').click () ->
         FacebookAuthentication.logout()
 
-FacebookAuthentication.setup
-
-require "//connect.facebook.net/en_US/sdk.js"
+FacebookAuthentication.setup()
