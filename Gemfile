@@ -1,4 +1,4 @@
-ruby '2.2.3'
+ruby '2.3.1'
 
 source 'https://rubygems.org'
 
@@ -6,14 +6,15 @@ gem 'rails'                       # Bundle edge Rails instead: gem 'rails', gith
 gem 'jquery-rails'                # Use jquery as the JavaScript library
 gem 'sass-rails'                  # Use sass for stylesheets
 gem 'haml-rails'                  # Use HAML as the rendering engine
-gem 'mongoid-rails'               # MongoDB mapper for data persistence layer
+gem 'mongoid', '6.0.0.rc0'        # MongoDB mapper for data persistence layer
 gem 'coffee-rails'
+gem 'pg'
 
 gem 'turbolinks'
 gem 'jbuilder'                    # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'bcrypt'                      # Use ActiveModel has_secure_password
 
-gem 'unicorn'                     # Use the unicorn application server for production
+gem 'puma'                        # Use the unicorn application server for production
 
 gem 'koala'
 gem 'yelp'
