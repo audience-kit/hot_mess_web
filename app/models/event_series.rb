@@ -1,3 +1,0 @@
-class EventSeries
-
-end

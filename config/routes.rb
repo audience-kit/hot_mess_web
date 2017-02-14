@@ -1,22 +1,5 @@
 Rails.application.routes.draw do
 
-
-  namespace :admin do
-    resources :locales
-
-    resources :people do
-      post :import, on: :collection
-    end
-
-    resources :venues do
-      post :import, on: :collection
-    end
-
-    resources :events do
-      post :import, on: :collection
-    end
-  end
-
   with_options only: [ :show, :index ] do
     resources :events
     resources :people
@@ -32,8 +15,9 @@ Rails.application.routes.draw do
   get :me, controller: :people, action: :show
 
   with_options controller: :home do
-    get :dashboard, action: :dashboard
     get :privacy, action: :privacy
+    get :contact, action: :contact
+    get :beta, action: :beta
     root action: :index
   end
 

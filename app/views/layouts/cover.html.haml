@@ -20,5 +20,25 @@
       %script( src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js' type='text/javascript' )
   %body
     .site-wrapper
-      = yield
+      .site-wrapper-inner
+        .cover-container
+          .masthead.clearfix
+            .inner
+              %h3.masthead-brand Hot Mess
+              %ul.nav.masthead-nav
+                %li.active
+                  %a{ href: root_path } Home
+                %li
+                  %a.facebook_login{ href: events_path} Events
+                %li
+                  %a{:href => "/contact"} Contact
+          .inner.cover
+            = yield
+          .mastfoot
+          .inner
+            %p
+              = succeed "," do
+                = "Copyright &copy; #{DateTime.now.year} - Hot Mess Productions".html_safe
+              = succeed "." do
+                %a{ href: "/privacy" } Privacy Policy
     #fb-root

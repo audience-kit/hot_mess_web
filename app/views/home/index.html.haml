@@ -1,27 +1,7 @@
-.site-wrapper-inner
-  .cover-container
-    .masthead.clearfix
-      .inner
-        %h3.masthead-brand Hot Mess
-        %ul.nav.masthead-nav
-          %li.active
-            %a{ href: root_path } Home
-          %li
-            %a.facebook_login{ href: events_path} Events
-          %li
-            %a{:href => "/contact"} Contact
-    .inner.cover
-      %h1.cover-heading Make a Scene.
-      %p.lead
-        Hot Mess is your link to the local gay nightlife.  Whether in your home town or while you're traveling, the details are here.
-      %p.lead
-        %a.btn.btn-lg.btn-default.facebook_login{:href => "#", :style => 'background: #3b5998; border-color: #8b9dc3; color: white;'}
-          = image_tag 'facebook_logo_white.png', size: '24x24', style: 'margin-right: 8px;'
-          Login with Facebook
-    .mastfoot
-      .inner
-        %p
-          = succeed "," do
-            = "Copyright &copy; #{DateTime.now.year} - Hot Mess Productions".html_safe
-          = succeed "." do
-            %a{ href: "/privacy" } Privacy Policy
+%h1.cover-heading Make a Scene.
+%p.lead
+  Hot Mess is your link to the local gay nightlife.  Whether in your home town or while you're traveling, the details are here.
+%p.lead
+  %a.btn.btn-lg.btn-default.facebook_login{:href => "#", :style => 'background: #3b5998; border-color: #8b9dc3; color: white;'}
+    = image_tag 'facebook_logo_white.png', size: '24x24', style: 'margin-right: 8px;'
+    Login with Facebook

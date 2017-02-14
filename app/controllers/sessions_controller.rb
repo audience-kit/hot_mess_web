@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
-  skip_before_action :set_user
 
   def create
     logger.debug "\tFacebook login with status #{facebook_session_params[:status]}"
@@ -9,38 +8,25 @@ class SessionsController < ApplicationController
       auth_response = Facebook.signed_message(facebook_session_params[:authResponse][:signedRequest])
       logger.debug "\tReceived Facebook signed authentication message #{auth_response.inspect}"
 
-      user_id = facebook_session_params[:authResponse][:userID].to_i
-      @person = Person.find_or_initialize_by(facebook_id: user_id)
-      @user = @person.user
-
       access_token_info = Facebook.oauth.get_access_token_info(auth_response['code'])
       logger.debug "\tGot access token info from Facebook #{access_token_info.inspect}"
 
       session[:facebook_access_token] = access_token_info['access_token']
       session[:facebook_access_expires] = access_token_info['expires'].to_i
 
-      long_access_token = Facebook.oauth.exchange_access_token_info(access_token_info['access_token'])
+      token_connection = Faraday.new url: Rails.application.secrets.api_location
 
-      @user.facebook_access_token = long_access_token['access_token']
-      @user.facebook_expires_in = long_access_token['expires'].to_i
+      response = token_connection.post '/token', facebook_token: access_token_info['access_token'], device: { type: 'web', identifier: request.remote_ip }
 
-      @user.update_from_facebook
+      if response.status == 200
+        session[:session_valid] = true
 
-      @user.save
-      @person.save
-
-      session[:user_id]     = user.id.to_s
-      session[:is_admin]    = user.is_admin
-      session[:first_name]  = user.first_name
-      session[:last_name]   = user.last_name
-      session[:name]        = user.person.name
-      session[:person_id]   = user.person.id.to_s
-
-      # redirect_to facebook_session_params[:redirect_to]
-      render nothing: true, status: 200
-    else
-      render :status => 500
+        # redirect_to facebook_session_params[:redirect_to]
+        return render text: 'OK', status: 200
+      end
     end
+
+    render :status => 500
   end
 
   def token
