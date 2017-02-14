@@ -19,3 +19,4 @@
 /cookbooks
 /doc/app
 /vendor
+!/vendor/assets/components
