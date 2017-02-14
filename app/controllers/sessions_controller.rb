@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       session[:facebook_access_token] = params[:authResponse][:accessToken]
       session[:facebook_access_expires] = params[:authResponse][:expiresIn].to_i
 
-      token_connection = Faraday.new url: Rails.application.secrets.api_location
+      token_connection = Faraday.new url: Rails.application.secrets.api_location, ssl: { verify: false }
 
       response = token_connection.post '/token', facebook_token: session[:facebook_access_token], device: { type: 'web', identifier: request.remote_ip }
 
