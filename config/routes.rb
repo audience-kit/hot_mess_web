@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get :privacy, action: :privacy
     get :contact, action: :contact
     get :beta, action: :beta
+    get :about, action: :about
     root action: :index
   end
 
