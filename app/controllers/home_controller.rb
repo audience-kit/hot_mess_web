@@ -15,4 +15,7 @@ class HomeController < ApplicationController
 
   def beta
   end
+
+  def about
+  end
 end
