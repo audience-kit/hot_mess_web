@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :locales, only: [ :show ]
 
   get :me, controller: :people, action: :show
+  get :now, controller: :now, action: :show
 
   with_options controller: :home do
     get :privacy, action: :privacy
