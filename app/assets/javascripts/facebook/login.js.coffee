@@ -52,11 +52,13 @@ FacebookAuthentication =
         FB.init({
           appId      : $("meta[name='fb-app']").attr('value'),
           xfbml      : true,
-          version    : 'v2.5'
+          version    : 'v2.5',
+          cookie     : true
         })
 
       $('.facebook_login').click () ->
-        FacebookAuthentication.login()
+        options = { scope: 'public_profile,email,user_friends' }
+        FacebookAuthentication.login(FacebookAuthentication.facebook_login_callback, options)
 
       $('.facebook_logout').click () ->
         FacebookAuthentication.logout()

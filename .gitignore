@@ -18,3 +18,5 @@
 /.vagrant
 /cookbooks
 /doc/app
+
+.DS_Store
