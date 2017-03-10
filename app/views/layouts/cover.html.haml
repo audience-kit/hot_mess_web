@@ -26,12 +26,12 @@
             .inner
               %h3.masthead-brand Hot Mess
               %ul.nav.masthead-nav
-                %li.active
-                  %a{ href: root_path } Home
-                %li
-                  %a{ href: '/about' } About
-                %li
-                  %a{ href: '/contact' } Contact
+                %li{ class: (params[:action] == 'index' || params[:action] == 'beta' ? 'active' : '')}
+                  = link_to 'Home', root_path
+                %li{ class: (params[:action] == 'about' ? 'active' : '')}
+                  = link_to 'About', controller: :home, action: :about
+                %li{ class: (params[:action] == 'contact' ? 'active' : '')}
+                  = link_to 'Contact', controller: :home, action: :contact
           .inner.cover
             = yield
           .mastfoot
