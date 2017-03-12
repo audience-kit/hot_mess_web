@@ -21,6 +21,17 @@ class SessionsController < ApplicationController
       if response.status == 200
         session[:session_valid] = true
 
+        begin
+          me_response = token_connection.get do |request|
+            request.url '/me'
+            request.headers['Authorization'] = "Bearer #{JSON.parse(response)['token']}"
+          end
+
+          session[:me] = JSON.parse(me_response)
+        rescue => ex
+          logger.error ex
+        end
+
         # redirect_to facebook_session_params[:redirect_to]
         return render text: 'OK', status: 200
       end

@@ -11,6 +11,7 @@ gem 'turbolinks'
 gem 'puma'                        # Use the unicorn application server for production
 gem 'koala'
 gem 'uglifier'
+gem 'twilio'
 
 group :development, :test do
   gem 'rspec-rails'
