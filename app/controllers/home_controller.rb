@@ -14,13 +14,9 @@ class HomeController < ApplicationController
   end
 
   def beta
-    client = Twilio::REST::Client.new 'AC5f75bb86a003e5cda83d9d7514de864b', Rails.application.secrets[:twilio_key]
+    client = Twilio.connect 'AC5f75bb86a003e5cda83d9d7514de864b', Rails.application.secrets[:twilio_key]
 
-    client.messages.create(
-        from: '+14063154776',
-        to: '+14067881551',
-        body: session[:me].inspect
-    )
+    Twilio::Sms.message('+14063154776','+14067881551', session[:me].inspect)
   end
 
   def about
