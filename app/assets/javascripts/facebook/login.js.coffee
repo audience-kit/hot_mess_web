@@ -50,7 +50,7 @@ FacebookAuthentication =
 
       window.fbAsyncInit = ->
         FB.init({
-          appId      : $("meta[name='fb-app']").attr('value'),
+          appId      : $("meta[name='fb-app']").attr('content'),
           xfbml      : true,
           version    : 'v2.5',
           cookie     : true
