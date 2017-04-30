@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "DWVXMLB45Y.social.hotmess.HotMess",
+        "paths": [ "*" ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [ "DWVXMLB45Y.social.hotmess.HotMess" ]
+  }
+}

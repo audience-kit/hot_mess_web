@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get :contact, action: :contact
     get :beta, action: :beta
     get :about, action: :about
+    get '/apple-app-site-association', action: :apple_association
     root action: :index
   end
 
