@@ -29,4 +29,8 @@ class HomeController < ApplicationController
   def apple_association
     send_file Rails.root.join('config/site_association.json'), content_type: 'application/json'
   end
+
+  def support
+
+  end
 end
