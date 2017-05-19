@@ -1,5 +1,5 @@
 class Admin::EventsController < Admin::AdminController
-  before_filter :set_event, only: [ :show, :edit, :destroy, :update ]
+  before_action :set_event, only: [ :show, :edit, :destroy, :update ]
 
   def index
     @events = Event.all
