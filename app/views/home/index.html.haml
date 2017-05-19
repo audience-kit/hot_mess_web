@@ -2,9 +2,8 @@
 %p.lead
   Hot Mess is your mobile link to the local gay nightlife.  Whether in your home town or while you're traveling, the details are here.
 %p.lead
-  %a.btn.btn-lg.btn-default.facebook_login{:href => "#", :style => 'background: #3b5998; border-color: #8b9dc3; color: white;'}
-    = image_tag 'facebook_logo_white.png', size: '24x24', style: 'margin-right: 8px;'
-    Login with Facebook
+  = link_to 'https://itunes.apple.com/us/app/hot-mess-gay-nightlife/id1195758383?ls=1&mt=8' do
+    = image_tag 'en_app_store.svg', size: '180x60'
 
 %p
   = image_tag 'ss_now.png', class: 'ss'
