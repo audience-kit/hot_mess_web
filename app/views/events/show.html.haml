@@ -1,19 +1,5 @@
 .panel.panel-default
   .panel-body
-    = picture_for @event, :large
-    %h1.page-header= @event.name
-  
-
-.row
-  .col-md-8
-    .panel.panel-primary
-      .panel-heading Event Details
-      .panel-body
-        = simple_format @event.description
-
-  .col-md-4
-    .panel.panel-default
-      .panel-heading Venue
-      .panel-body
-        - if @event.venue
-          = link_to @event.venue, @event.venue.name
+    - if @event.data['cover_photo_url']
+      = image_tag @event.data['cover_photo_url']
+    %h1.page-header= @event.data['name']

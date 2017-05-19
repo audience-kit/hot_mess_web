@@ -12,6 +12,9 @@ gem 'puma'                        # Use the unicorn application server for produ
 gem 'koala'
 gem 'uglifier'
 gem 'twilio-ruby'
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'json'
 
 group :development, :test do
   gem 'rspec-rails'
