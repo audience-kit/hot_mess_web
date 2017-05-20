@@ -1,5 +1,5 @@
 .panel.panel-default
   .panel-body
-    - if @venue.data['cover_photo_url']
-      = image_tag @venue.data['cover_photo_url']
+    - if @venue.data['hero_url']
+      = image_tag @venue.data['hero_url']
     %h1.page-header= @venue.data['name']

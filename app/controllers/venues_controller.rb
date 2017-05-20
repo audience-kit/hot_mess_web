@@ -5,6 +5,6 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
     @title = @venue.data['name']
     @app_link = "events/#{@venue.data['id']}"
-    @image = @venue.data['cover_photo_url']
+    @image = @venue.data['hero_url']
   end
 end
