@@ -6,6 +6,12 @@
     %meta( viewport="width=device-width, initial-scale=1" )
     %meta{ name: 'fb-app', value: Rails.application.secrets.facebook['app_id'] }
     %meta{ name: 'apple-itunes-app', content: 'app-id=1195758383'}/
+    - if @app_link
+      %meta{ property: 'al:ios:url', content: "hotmess://#{@app_link}" }/
+    %meta{ property: 'al:ios:app_store_id', content: '1195758383' }/
+    %meta{ property: 'al:ios:app_name', content: 'Hot Mess' }/
+    %meta{ property: 'og:title', content: @title }/
+    %meta{ property: 'og:type', content: 'website' }/
     %title Hot Mess - #{@title}
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
@@ -16,7 +22,7 @@
 
     .container( role="main" )
       .h1 Hot Mess
-      
+
       - if flash[:notice]
         %p#notice.bg-primary.flash= flash[:notice]
       - if flash[:danger]
