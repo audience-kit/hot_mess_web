@@ -6,7 +6,7 @@
     %meta( viewport="width=device-width, initial-scale=1" )
     %meta{ name: 'fb-app', value: Rails.application.secrets.facebook['app_id'] }
     %meta{ name: 'apple-itunes-app', content: 'app-id=1195758383'}/
-    %title Hot Mess
+    %title Hot Mess - #{@title}
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
     /[if lt IE 9]
@@ -14,8 +14,9 @@
       %script( src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" type="text/javascript" )
   %body( role="document" )
 
-
     .container( role="main" )
+      .h1 Hot Mess
+      
       - if flash[:notice]
         %p#notice.bg-primary.flash= flash[:notice]
       - if flash[:danger]
@@ -26,6 +27,10 @@
         %p#flash_warning.bg-warning.flash= flash[:warning]
 
       = yield
+
+      = link_to 'https://itunes.apple.com/us/app/hot-mess-gay-nightlife/id1195758383?ls=1&mt=8' do
+        = image_tag 'en_app_store.svg', size: '180x60'
+
     #body_script_tags
       = javascript_include_tag 'application'
     #fb-root

@@ -7,5 +7,6 @@ class Event
 
   def initialize(data)
     @data = data
+    puts "Event => #{data}"
   end
 end
