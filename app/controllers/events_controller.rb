@@ -5,6 +5,6 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @title = @event.data['name']
-    @app_link = "events/#{id}"
+    @app_link = "events/#{params[:id]}"
   end
 end
