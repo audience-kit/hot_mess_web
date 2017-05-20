@@ -12,6 +12,9 @@
     %meta{ property: 'al:ios:app_name', content: 'Hot Mess' }/
     %meta{ property: 'og:title', content: @title }/
     %meta{ property: 'og:type', content: 'website' }/
+    - if @image
+      %meta{ property: 'og:image', content: @image }/
+    %meta{ property: 'og:locale', content: 'en_US' }/
     %title Hot Mess - #{@title}
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
