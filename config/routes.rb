@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     root action: :index
   end
 
+  scope '.well-known' do
+    get :'apple-app-site-association', to: 'home#apple_association'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

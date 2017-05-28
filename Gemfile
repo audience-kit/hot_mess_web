@@ -1,4 +1,4 @@
-ruby '2.3.3'
+ruby '2.4.1'
 
 source 'https://rubygems.org'
 
@@ -12,6 +12,9 @@ gem 'puma'                        # Use the unicorn application server for produ
 gem 'koala'
 gem 'uglifier'
 gem 'twilio-ruby'
+gem 'faraday'
+gem 'faraday_middleware'
+gem 'json'
 
 group :development, :test do
   gem 'rspec-rails'

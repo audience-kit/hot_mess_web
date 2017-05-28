@@ -1,35 +1,5 @@
 .panel.panel-default
   .panel-body
-    = picture_for @venue, :large
-    %h1.page-header= @venue.name
-    %h3= @venue.about
-
-
-.row
-  .col-md-8
-    - if @venue.description || @venue.cover
-      .panel.panel-primary
-        .panel-body
-          - if @venue.description
-            %p
-              = @venue.description
-          - if @venue.cover
-            %img{ src: @venue.cover.source, style: 'width: 100%' }
-
-  .col-md-4
-    .panel.panel-default
-      .panel-heading About
-      .panel-body
-        %p
-          %b Address
-        %p
-          = @venue.location
-        %p
-          %b Phone number
-        %p
-          = @venue.phone
-        - if @venue.facebook_url
-          %p
-            %b Facebook Page
-          %p
-            = link_to @venue.facebook_url, @venue.facebook_url
+    - if @venue.data['hero_url']
+      = image_tag @venue.data['hero_url']
+    %h1.page-header= @venue.data['name']
